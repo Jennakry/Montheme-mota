@@ -8,3 +8,24 @@ Version: 1.0
 Tags: openclassrooms, cookinfamily, cours
 Text Domain: montheme-mota
 */
+
+* {
+    font-family: 'space mono', monospace;
+}
+
+
+
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    list-style: none; 
+}
+a{
+    text-decoration: none;
+    font-family: 'space mono', monospace;
+    font-size: 24px;
+    color: black;
+
+}
