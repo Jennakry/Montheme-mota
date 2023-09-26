@@ -18,10 +18,7 @@
 <body>
     <header>
         <nav id="navigation">
-            <div class="img-logo">
-                <img src="/mota/wp-content/themes/Montheme-mota/assets/images/logo.png">
 
-            </div>
             <?php
             wp_nav_menu(
                 array(
@@ -29,13 +26,11 @@
                     'menu_id' => 'primary-menu',
                 )
             );
+
+
             ?>
 
-
-
-
-
-
+            <?php get_template_part('<template-parts/contact'); ?>
 
 
         </nav>

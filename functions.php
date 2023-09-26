@@ -26,7 +26,7 @@ function footer_montheme()
 
 {
 ?>
-    <p>je suis avant la fin du body</p>
+
 <?php
 
 }
@@ -44,7 +44,7 @@ add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 //Déclare le JS//
 function theme_enqueue_scripts()
 {
-    wp_enqueue_script('scripts-1', get_stylesheet_directory_uri() . '/script.js', array(), '1.0', true);
+    wp_enqueue_script('scripts-1', get_stylesheet_directory_uri() . '/js/script.js', array(), '1.0', true);
 }
 
 add_action('wp_enqueue_scripts', 'theme_enqueue_scripts');
