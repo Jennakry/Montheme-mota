@@ -15,14 +15,23 @@ Text Domain: montheme-mota
     text-decoration: none;
 }
 
+.admin-bar .menu {
+	top: 32px; /* on prend en compte le décalage */
+}
+
 /* HEADER */
 nav {
-    margin: 0px 100px;
+   width:1440px;
+   height:80px;
+    background-image: url('assets/images/Logo.png');
+    background-repeat: no-repeat;
+    margin: 0 37px;
 }
-ul {
+nav ul {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    align-items: center;
     gap: 74px;
     
 }
@@ -31,30 +40,19 @@ a{
     font-size: 16px;
     color: black;
     text-transform: uppercase;
+}
 
-}
-.menu-menu-header-container {
-    background-image: url('assets/images/Logo.png');
-    background-repeat: no-repeat;
-    height: 80px;
-    width:100%;
-  
- 
-}
 
 /* FOOTER */
 
-.footer {
+#menu-menu-footer {
     display:flex;
+    gap: 74px;
     justify-content: center;
-    width:auto;
     border-top: 1px solid black;
-    font-size: 16px;
-}
-
-.footer ul{
-   cursor:pointer;
-    gap:110px;
+    padding-top:10px;
+    height: 40px;
+    width: 1440px;
 }
 
 /* The Modal (background) */
@@ -95,3 +93,48 @@ a{
     cursor: pointer;
 }
 
+/* MENU FORMAT MOBILE */
+
+@media screen and (max-width: 768px) {
+    nav {
+        width: 375px;
+        height: 72px;
+    }
+
+    #menu-menu-footer {width: 375px;
+        height: 72px;
+
+    }
+    #btnMenu.active + #menu-menu-header{
+      display: block; /* Affiche le menu hamburger lorsque la classe "active" est ajoutée */
+    
+    }
+
+    #menu-menu-header {
+        display:none;
+    }
+    #menu-menu-header.active {
+        display: block;
+      }
+      #btnMenu.active .icon-bar{
+        background-color: black;
+      }
+  }
+  
+
+
+  
+  /* Styles pour le bouton hamburger */
+  #btnMenu {
+    display: none; /* Affiche le bouton hamburger */
+    cursor: pointer;
+  }
+  
+  .icon-bar {
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    margin: 4px 0;
+    transition: 0.4s;
+  }
+  

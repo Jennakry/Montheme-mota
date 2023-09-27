@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html <?php language_attributes(); ?>>
 
 <head>
     <meta charset="UTF-8">
@@ -11,27 +11,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
 
     <title>Mota</title>
+
     <?php wp_head(); ?>
 
 </head>
 
-<body>
-    <header>
-        <nav id="navigation">
+<body class="home blog logged-in admin-bar no-customize-support">
 
-            <?php
-            wp_nav_menu(
-                array(
+    <body <?php body_class(); ?>>
+        <?php wp_body_open(); ?>
+
+
+        <header>
+            <nav role="navigation" aria-label="<?php _e('Menu principal', 'text-domain'); ?>">
+
+                <a class="btn btn-navbar" id="btnMenu">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+                <!-- Affiche le "Menu princiapal" enregistré au préalable. -->
+                <?php
+                wp_nav_menu([
                     'theme_location' => 'main-menu',
-                    'menu_id' => 'primary-menu',
-                )
-            );
+                    'container' => 'false', //On retire le conteneur généré par WP
+
+                ]);
+
+                ?>
+
+                <?php get_template_part('template-parts/contact'); ?>
 
 
-            ?>
-
-            <?php get_template_part('<template-parts/contact'); ?>
-
-
-        </nav>
-    </header>
+            </nav>
+        </header>

@@ -1,5 +1,5 @@
 <?php get_header(); ?>
 
-<H1>Photographe freelance</H1>
+<h1>COUCOUC</h1>
 
 <?php get_footer(); ?>
