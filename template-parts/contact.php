@@ -1,6 +1,3 @@
-<!-- Déclencher et ouvrir le Modal -->
-<button id="myBtn">Contact</button>
-
 <!-- La Modale -->
 <div id="myModal" class="modal">
 

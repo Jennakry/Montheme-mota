@@ -2,7 +2,7 @@
 var modal = document.getElementById('myModal');
 
 // Get the button that opens the modal
-var btn = document.getElementById("myBtn");
+var btn = document.getElementById("menu-item-20");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
@@ -23,6 +23,8 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
+
 
 //HEADER MOBILE
 
