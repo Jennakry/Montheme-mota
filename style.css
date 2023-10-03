@@ -42,7 +42,6 @@ a{
     text-transform: uppercase;
 }
 
-
 /* FOOTER */
 
 #menu-menu-footer {
@@ -57,7 +56,7 @@ a{
 
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
+    display: none; /*Caché */
     position: fixed; 
     z-index: 1; 
     left: 0;
@@ -65,11 +64,11 @@ a{
     width: 433px;
     height: 700px; 
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgb(0,0,0); 
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-/* Contenu Content/Box */
+/* Contenu de la Modale */
 .modal-content {
     position: absolute;
     background-color: white;
@@ -103,8 +102,8 @@ a{
 
 /* MENU FORMAT MOBILE */
 
-@media screen and (max-width: 768px) {
-    nav {
+@media only screen and (max-width: 768px) {
+    nav {position:static;
         width: 375px;
         height: 72px;
     }
@@ -113,10 +112,50 @@ a{
         height: 72px;
 
     }
-    #btnMenu.active + #menu-menu-header{
-      display: block; /* Affiche le menu hamburger lorsque la classe "active" est ajoutée */
-    
-    }
+
+    /* Styles pour le bouton hamburger */
+#btnMenu {
+    cursor: pointer;
+    float:right;
+    width: 72px;
+    height:50px;
+    /* position: fixed; */
+    z-index: 10;
+  }
+  
+  
+  .icon-bar {
+    position: relative;
+    display:block;
+    width: 20px;
+    height: 3px;
+    background-color: black;
+    margin: 7px 0;
+    transition: transform 0.3s esae-out, 
+                opacity 0.1s ease-out;
+  }
+ 
+  .l1{
+    transform: translateY(-10px);
+ }
+ .l3{
+   transform: translateY(10px)
+ }
+ #btnMenu.active .l1 {
+    transform: translateY(0px) rotate(135deg);
+  
+  }
+  .btnMenu.active .l2 {
+    opacity: 0;
+  }
+  .btnMenu.active .l3 {
+    transform: translateY(0px) rotate(-135deg);
+  
+  }
+
+  
+
+    /*Cache le menu principale */
 
     #menu-menu-header {
         display:none;
@@ -124,25 +163,10 @@ a{
     #menu-menu-header.active {
         display: block;
       }
-      #btnMenu.active .icon-bar{
-        background-color: black;
-      }
-  }
-  
-
-
-  
-  /* Styles pour le bouton hamburger */
-  #btnMenu {
-    display: none; /* Affiche le bouton hamburger */
-    cursor: pointer;
-  }
-  
-  .icon-bar {
-    width: 25px;
-    height: 3px;
-    background-color: black;
-    margin: 4px 0;
-    transition: 0.4s;
-  }
+ 
+        
+      
+        
+        
+    
   

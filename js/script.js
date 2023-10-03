@@ -29,15 +29,25 @@ window.onclick = function(event) {
 //HEADER MOBILE
 
 
-window.onload=function(){
-    var bouton = document.getElementById('btnMenu');
-    var nav = document.getElementById('nav');
-    bouton.onclick = function(e){
-        if(nav.style.display=="block"){
-            nav.style.display="none";
-        }else{
-            nav.style.display="block";
-        }
-    };
-};
+// window.onload=function(){
+//     var bouton = document.getElementById('btnMenu');
+//     var nav = document.getElementById('nav');
+//     bouton.onclick = function(e){
+//         if(nav.style.display=="block"){
+//             nav.style.display="none";
+//         }else{
+//             nav.style.display="block";
+//         }
+//     };
+// };
   
+const burgerButton = document.querySelector('#btnMenu');
+const navigation = document.querySelector('.menu-mobile');
+
+
+burgerButton.addEventListener('click', toggleNav);
+
+function toggleNav () {
+  burgerButton.classList.toggle("active");
+  navigation.classList.toggle("active");
+}

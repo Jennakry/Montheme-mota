@@ -23,12 +23,12 @@
 
 
         <header>
-            <nav role="navigation" aria-label="<?php _e('Menu principal', 'text-domain'); ?>">
+            <nav role="navigation" aria-label="<?php _e('Menu principal', 'text-domain'); ?>" class="menu-mobile">
 
                 <a class="btn btn-navbar" id="btnMenu">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    <span class="icon-bar l1"></span>
+                    <span class="icon-bar l2"></span>
+                    <span class="icon-bar l3"></span>
                 </a>
 
                 <!-- Affiche le "Menu princiapal" enregistré au préalable. -->
