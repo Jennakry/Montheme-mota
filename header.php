@@ -46,5 +46,5 @@
 
             </nav>
 
-            <img src="<?php echo get_stylesheet_directory_uri(); ?> /assets/images/Header.png" alt="photo header" class="photo-banner">
+
         </header>

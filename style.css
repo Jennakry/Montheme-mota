@@ -45,6 +45,9 @@ a{
     color: black;
     text-transform: uppercase;
 }
+a:hover {
+    font-weight:bold;
+}
 
 /* FOOTER */
 
