@@ -1,9 +1,9 @@
 <?php
 
-// Ajouter la prise en charge des images mises en avant
+// Ajoute la prise en charge des images mises en avant
 add_theme_support('post-thumbnails');
 
-// Ajouter automatiquement le titre du site dans l'en-tête du site
+// Ajoute automatiquement le titre du site dans l'en-tête du site
 add_theme_support('title-tag');
 
 
@@ -21,13 +21,6 @@ add_action('after_setup_theme', 'register_my_menu');
 function theme_enqueue_scripts()
 {
     wp_enqueue_script('jquery'); // On annule l'inscription du jQuery de WP
-    wp_enqueue_script( // On déclare une version plus moderne
-        'jquery',
-        'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
-        false,
-        '3.3.1',
-        true
-    );
     wp_enqueue_script('scripts-1', get_stylesheet_directory_uri() . '/js/script.js', array('jquery'), '1.0', true);
 }
 
@@ -40,3 +33,32 @@ function theme_enqueue_styles()
 }
 
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
+
+
+// LOAD MORE
+
+function weichie_load_more()
+{
+    $ajaxposts = new WP_Query([
+        'post_type' => 'publications',
+        'posts_per_page' => 8,
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'paged' => $_POST['paged'],
+    ]);
+
+    $response = '';
+
+    if ($ajaxposts->have_posts()) {
+        while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
+            $response .= get_template_part('parts/card', 'publication');
+        endwhile;
+    } else {
+        $response = '';
+    }
+
+    echo $response;
+    exit;
+}
+add_action('wp_ajax_weichie_load_more', 'weichie_load_more');
+add_action('wp_ajax_nopriv_weichie_load_more', 'weichie_load_more');

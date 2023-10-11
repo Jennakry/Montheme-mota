@@ -41,10 +41,8 @@
 
                 ?>
 
-                <?php get_template_part('template-parts/contact'); ?>
-
 
             </nav>
 
-
+            <?php include_once 'template-parts/contact.php'; ?>
         </header>
