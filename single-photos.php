@@ -14,7 +14,6 @@ get_header();
 
                     <h2 class="title">
                         <?php the_title(); ?>
-
                     </h2>
                     <p class="ref">
                         REFERENCE: <?php echo get_post_meta(get_the_ID(), 'reference', true); ?>
@@ -43,19 +42,21 @@ get_header();
                     <?php endif; ?>
                 </div>
 
-                <div>
-
-                    <p>Cette photo vous intéresse-t-elle?</p>
-
-                    <button class="myBtn">contact</button>
-
-                </div>
-
-
-
 
 
             </div>
+
+            <div class="border-line">
+
+                <p>Cette photo vous intéresse-t-elle?</p>
+
+                <div class="myBtn">
+                    <button>Contact</button>
+                </div>
+
+            </div>
+
+            <p>VOUS AIMEREZ AUSSI</p>
         </article>
 
 
