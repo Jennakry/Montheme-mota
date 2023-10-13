@@ -145,6 +145,11 @@ button  {
     width: 272px;
     height: 50px;
     border: none;
+    cursor: pointer;
+}
+
+.section3 {
+    margin-top: 50px;
 }
 
 /* PHOTO BLOCK */
