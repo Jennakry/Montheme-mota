@@ -13,16 +13,20 @@ Text Domain: montheme-mota
     font-family: 'space mono', monospace;
     list-style: none;
     text-decoration: none;
+    max-width: 1440px;
 }
 
 .admin-bar .menu {
 	top: 32px; /* on prend en compte le décalage */
 }
 
+.content { max-width: 1440px;
+}
+
 /*---------------------------------------------------- HEADER -------------------------------------------------------------------------------*/
 
-header { width:1440px;
-    height:80px;
+header { max-width:1440px;
+    height:30px;
 
 }
 nav {
@@ -118,6 +122,7 @@ font-style: italic;
 p {
 font-size: 14px;
 font-weight: 400;
+
 }
 
 .post-content {
@@ -127,17 +132,21 @@ font-weight: 400;
    
 
 .post-image img {
-    width:563px;
-    height:844px;
+    width:560px;
+
 }
 
 
 
 .border-line {display:flex;
     border-bottom: 1px solid black;
-    border-top: 1px solid black;
+    
     gap:100px;
     padding:20px;
+}
+
+.border-line p {
+    margin-left: 90px;
 }
 
 button  {
@@ -146,31 +155,120 @@ button  {
     height: 50px;
     border: none;
     cursor: pointer;
+    transition: background-color 0.3s
 }
+ .btn-all-photos {display:flex;
+    justify-content: center;
+    margin-top:  30px;
+    margin-bottom:  30px;
+ }
 
+ .button:hover {
+    background-color:black;
+    color: white;
+    
+ }
 .section3 {
     margin-top: 50px;
+    
 }
 
-/* PHOTO BLOCK */
+.photo_choix {display:flex;
+    gap: 20px;
+}
+
+.post-description {
+    margin-top: 345px;
+    border-bottom: 1px solid #000000;
+}
+
+.photo_avant a , .photo_apres a {
+
+    display:block;
+}
+.left:hover {
+    color:black;
+
+}
+.photo_avant  , .photo_apres {
+    text-align:center;
+}
+
+/*------------------------------------------------------- BLOCK-SINGLE (section 3)----------------------------------------------------------------------*/
+.photo_aleatoire {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    gap: 20px;
+}
+.photo_aimerezaussi img{
+    width: 564px;
+    height: 495px;
+  object-fit: cover;
+}
+
+.photo_aimerezaussi {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap:20px;
+    max-width: 1440px;
+}
+.section3 h3{
+    font-size:18px;
+    font-weight: 400px!important;
+}
+
+/*------------------------------------------------- PHOTO BLOCK (page d'accueil)--------------------------------------------*/
 
 .content-area {
 display:flex;
 flex-wrap:wrap;
+justify-content: center;
 gap:15px;
-/* width:1148px;
-height: 2040; */
+width:1440px;
 }
 
 .content-area img {
     width: 564px;
     height: 495px;
+    object-fit: cover;
 }
 
+/*HERO*/
+
+.hero-banner {
+    width: 1440px;
+    height: 962px;
+    margin-bottom: 20px;
+    z-index: 100;
+}
+
+.hero-banner img {
+    width: 1440px;
+    height: 962px;
+    object-fit: cover;
+}
+
+.titre_hero {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
 
 /* MENU FORMAT MOBILE */
 
-@media only screen and (max-width: 768px) {
+/* @media only screen and (max-width: 768px) {
     nav {position:static;
         width: 375px;
         height: 72px;
@@ -182,13 +280,13 @@ height: 2040; */
     }
 
     /* Styles pour le bouton hamburger */
-#btnMenu {
+/* #btnMenu {
     cursor: pointer;
     float:right;
     width: 72px;
     height:50px;
     /* position: fixed; */
-    z-index: 10;
+    /* z-index: 10;
   }
   
   
@@ -219,13 +317,13 @@ height: 2040; */
   .btnMenu.active .l3 {
     transform: translateY(0px) rotate(-135deg);
   
-  }
+  } */
 
 
 
     /*Cache le menu principale */
 
-    #menu-menu-header {
+    /* #menu-menu-header {
         display:none;
     }
     #menu-menu-header.active {
@@ -237,9 +335,9 @@ height: 2040; */
         width:379px;
         height:253px;
       }
-        
+         */
       
         
         
     
-  
+   */ */

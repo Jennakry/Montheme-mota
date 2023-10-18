@@ -1,8 +1,6 @@
 <?php get_header(); ?>
 
-
 <main>
-    <!-- HERO BANNER -->
 
     <!-- GALERIE DE PHOTO -->
 

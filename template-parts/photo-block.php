@@ -5,8 +5,51 @@ Template Post Type: page
 */
 get_header(); ?>
 
-<div id="primary" class="content-area">
+<!-- HERO BANNER -->
+<div class="hero-banner">
 
+
+    <img class="logo" src="/wp-content/themes/Montheme-mota/assets/images/Titre-header.png" alt='logo'>
+
+
+
+    <?php
+    $args = array(
+        'post_type' => 'photos',
+        'posts_per_page' => 1,
+        'orderby' => 'rand',
+    );
+
+    $loop = new WP_Query($args);
+
+    while ($loop->have_posts()) : $loop->the_post();
+        the_post_thumbnail();
+    endwhile;
+    wp_reset_postdata();
+    ?>
+
+</div>
+
+<!-- FILTRE ET TRI -->
+<div class="custom-select" style="width:260px;">
+    <select>
+        <option value="0">Catégories</option>
+        <option value="1">Mariage</option>
+        <option value="2">Concert</option>
+        <option value="3">Réception</option>
+        <option value="4">Télévision</option>
+    </select>
+</div>
+
+<div class="custom-select-format" style="width:260px;">
+    <select>
+        <option value="0">Formats</option>
+        <option value="1">Paysage</option>
+        <option value="2">Portrait</option>
+    </select>
+</div>
+
+<div id="primary" class="content-area">
 
     <?php
     // 1. On définit les arguments pour définir ce que l'on souhaite récupérer

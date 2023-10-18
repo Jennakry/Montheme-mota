@@ -32,6 +32,11 @@ get_header();
                         FORMAT: <?php echo the_terms(get_the_ID(), 'formats', false); ?>
                     </p>
 
+                    <p>
+
+                        ANNEE: <?php echo get_the_date(); ?>
+                    </p>
+
                 </div>
 
                 <div class="post-image">
@@ -90,9 +95,14 @@ get_header();
                 </div>
             </div>
             <div class="section3">
-                <h2>VOUS AIMEREZ AUSSI</h2>
+                <h3>VOUS AIMEREZ AUSSI</h3>
 
                 <?php include_once "Block-single.php"; ?>
+
+                <div class="btn-all-photos">
+                    <button><a href="http://localhost/mota/">Toutes les photos</a></button>
+
+                </div>
 
             </div>
         </article>

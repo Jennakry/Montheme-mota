@@ -23,24 +23,26 @@ $query = new WP_Query($args);
 
         <!-- //On parcourt chacun des articles résultant de la requête -->
         <?php $count = 0; ?>
-        <?php while ($query->have_posts()) : ?>
-            <?php $count++; ?>
-            <?php $query->the_post(); ?>
+        <div class="photo_aimerezaussi">
+            <?php while ($query->have_posts()) : ?>
+                <?php $count++; ?>
+                <?php $query->the_post(); ?>
 
 
-            <?php the_content(); ?>
-            <?php if (has_post_thumbnail()) : ?>
+                <?php the_content(); ?>
+                <?php if (has_post_thumbnail()) : ?>
 
-                <div class="photo_aimerezaussi">
+
                     <?php the_post_thumbnail(); ?>
 
-                </div>
-                <?php if ($count == 2) {
-                    break; // sortir de la boucle si deux photos ont été traitées
-                } ?>
-            <?php endif; ?>
 
-        <?php endwhile; ?>
+                    <?php if ($count == 2) {
+                        break; // sortir de la boucle si deux photos ont été traitées
+                    } ?>
+                <?php endif; ?>
+
+            <?php endwhile; ?>
+        </div>
 </div>
 <?php else : ?>
     <p>Désolé, aucun article ne correspond à cette requête</p>
