@@ -35,13 +35,12 @@ function theme_enqueue_styles()
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 
 
-// LOAD MORE
-
+// BOUTON CHARGER PLUS//
 function weichie_load_more()
 {
     $ajaxposts = new WP_Query([
-        'post_type' => 'publications',
-        'posts_per_page' => 8,
+        'post_type' => 'photos',
+        'posts_per_page' => 6,
         'orderby' => 'date',
         'order' => 'DESC',
         'paged' => $_POST['paged'],

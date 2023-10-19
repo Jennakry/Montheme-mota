@@ -30,29 +30,48 @@ window.addEventListener('click', function(event){
 
 })
 
+//FILTRE ET TRI//
 
+jQuery(document).ready(function($) {
+  $('#filtrer').on('click', function() {
+    var catID = $('.custom-select select[name="categorie"]').val();
+    var formatID = $('.custom-select-format select[name="format"]').val();
 
+    // Effectuez la requête AJAX en utilisant catID et formatID comme données à envoyer au serveur.
+    $.ajax({
+      url: ajaxurl, // URL de l'action AJAX
+      type: 'POST',
+      data: {
+        action: 'tri_par_categorie_et_format',
+        cat_id: catID,
+        format_id: formatID
+      },
+      success: function(response) {
+        // Mettez à jour l'interface utilisateur avec les résultats de la requête
+      }
+    });
+  });
+});
 
 // Lire plus
 
-// let currentPage = 1;
-// $('#load-more').on('click', function() {
-//   currentPage++; // Do currentPage + 1, because we want to load the next page
+let currentPage = 1; // Numéro de la page initiale
+$('#load-more').on('click', function() {
+  currentPage++; // 
 
-//   $.ajax({
-//     type: 'POST',
-//     url: '/wp-admin/admin-ajax.php',
-//     dataType: 'html',
-//     data: {
-//       action: 'weichie_load_more',
-//       paged: currentPage,
-//     },
-//     success: function (res) {
-//       $('.publication-list').append(res);
-//     }
-//   });
-// });
-
+  $.ajax({
+    type: 'POST',
+    url: '/mota/wp-admin/admin-ajax.php',
+    dataType: 'html',
+    data: {
+      action: 'weichie_load_more',
+      paged: currentPage,
+    },
+    success: function (res) {
+      $('.publication-list').append(res);
+    }
+  });
+});
 
 
 //HEADER MOBILE
