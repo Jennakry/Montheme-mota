@@ -23,14 +23,9 @@
 
 
         <header>
-            <nav role="navigation" aria-label="<?php _e('Menu principal', 'text-domain'); ?>" class="menu-mobile">
-                <!-- Menu mobile -->
-                <a class="btn btn-navbar" id="btnMenu">
-                    <span class="icon-bar l1"></span>
-                    <span class="icon-bar l2"></span>
-                    <span class="icon-bar l3"></span>
-                </a>
+            <nav role="navigation" aria-label="<?php _e('Menu principal', 'text-domain'); ?>" id="nav" class="active">
 
+                <div class="icons"></div>
                 <!-- Affiche le "Menu princiapal" enregistré au préalable. -->
                 <?php
                 wp_nav_menu([

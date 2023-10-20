@@ -36,6 +36,7 @@ add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 
 
 // BOUTON CHARGER PLUS//
+
 function weichie_load_more()
 {
     $ajaxposts = new WP_Query([

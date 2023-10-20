@@ -33,6 +33,8 @@ get_header(); ?>
 </div>
 
 <!-- FILTRE ET TRI -->
+
+
 <div class="contain-select">
 
     <div class="custom-select" style="width:260px;">
@@ -96,8 +98,14 @@ get_header(); ?>
 
 </div>
 
+<!-- BOUTON  CHARGER PLUS-->
 
 
-<button id="load-more">Charger plus</button>
+
+<div class="btn__wrapper">
+    <button id="load-more">Charger plus</button>
+</div>
+
+
 
 <?php get_footer(); ?>

@@ -2,23 +2,22 @@
 
 <main>
 
-    <!-- GALERIE DE PHOTO -->
 
+    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+            <article>
+                <header>
+                    <h1><?php the - title(); ?></h1>
+                </header>
 
-    <?php
-    $uri = explode('/', $_SERVER['REQUEST_URI']);
-    var_dump($uri);
-    $uri_nb = count($uri);
-    switch ($uri[$uri_nb - 1]) {
-        case 'photo-block':
-            get_template_part('template-parts/photo-block');
-            break;
-        case 'single-photo':
-            get_template_part('template-parts/content/single-photo');
-            break;
-    }
+                <?php the_content(); ?>
+            </article>
 
-    ?>
+        <?php endwhile; ?>
+    <?php else : ?>
+        <article>
+            <h2>No posts found</h2>
+        </article>
+    <?php endif; ?>
 </main>
 
 <?php get_footer(); ?>

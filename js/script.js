@@ -55,6 +55,7 @@ jQuery(document).ready(function($) {
 
 // Lire plus
 
+
 let currentPage = 1; // Numéro de la page initiale
 $('#load-more').on('click', function() {
   currentPage++; // 
@@ -76,6 +77,9 @@ $('#load-more').on('click', function() {
 
 //HEADER MOBILE
 
+icons.addEventListener('click'), ()  => {
+nav.classList.toggle("active")
+}
 
 // window.onload=function(){
 //     var bouton = document.getElementById('btnMenu');

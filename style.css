@@ -52,7 +52,7 @@ a{
 a:hover {
     font-weight:bold;
 }
-
+ 
 /*---------------------------------------------------- FOOTER ------------------------------------------------------------------------*/
 
 #menu-menu-footer {
@@ -245,7 +245,11 @@ width:1440px;
     object-fit: cover;
 }
 
-
+.btn__wrapper {
+    display:flex;
+    justify-content:center;
+    margin-top: 20px;
+}
 
 
 /*HERO*/
@@ -286,91 +290,64 @@ width:1440px;
     object-fit: cover;
 }
 
+/* Menu burger*/
 
-/* MENU FORMAT MOBILE */
+#btnMenu:before {
+display: none;
 
-@media only screen and (max-width: 768px) {
-    nav {position:static;
-        width: 375px;
-        height: 72px;
+}
+
+/* Media queries */
+
+ @media (max-width: 700px) {  
+
+
+    #icons {
+        display:block;
     }
+    #icons:before {
+        content:"\2630";   /*icon hamburger*/
+        
+        }
+
+    .active #icons:before {   /*Quand la classe "active" est injecté icon fermeture du menu hamburger apparait*/
+            content:"\2613";
+        }
+
+    nav ul {
+        position: fixed;
+        left: -100%;
+        top: 5%;
+        flex-direction:column;
+        background-color:#E00000;
+        width: 100%;
+        text-align:center;
+        transition: 0.25s;
+        }
+
+      
+
+    nav.active ul {
+            left: 0px;
+        }
+    }
+
+
 
     #menu-menu-footer {width: 375px;
         height: 72px;
 
     }
 
-    .hero-banner {
-        width: 379px;
-        height: 300px;
-    }
+   
 
-    .photoHero img {
-        padding-top: 20px;
-        width: 375px;
-        height: 253px;
-    }
-}
 
-    /* Styles pour le bouton hamburger */
-/* #btnMenu {
-    cursor: pointer;
-    float:right;
-    width: 72px;
-    height:50px;
-    /* position: fixed; */
-    /* z-index: 10;
-  }
-  
-  
-  .icon-bar {
-    position: relative;
-    display:block;
-    width: 20px;
-    height: 3px;
-    background-color: black;
-    margin: 7px 0;
-    transition: transform 0.3s esae-out, 
-                opacity 0.1s ease-out;
-  }
- 
-  .l1{
-    transform: translateY(-10px);
- }
- .l3{
-   transform: translateY(10px)
- }
- #btnMenu.active .l1 {
-    transform: translateY(0px) rotate(135deg);
-  
-  }
-  .btnMenu.active .l2 {
-    opacity: 0;
-  }
-  .btnMenu.active .l3 {
-    transform: translateY(0px) rotate(-135deg);
-  
-  } */
+   
 
 
 
-    /*Cache le menu principale */
 
-    /* #menu-menu-header {
-        display:none;
-    }
-    #menu-menu-header.active {
-        display: block;
-      }
- 
-      .photo-banner {
-
-        width:379px;
-        height:253px;
-      }
-         */
       
         
         
-    
-   */ */
+
