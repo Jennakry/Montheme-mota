@@ -37,21 +37,20 @@ add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 
 // BOUTON CHARGER PLUS//
 
-function weichie_load_more()
+function load_more_posts()
 {
     $ajaxposts = new WP_Query([
         'post_type' => 'photos',
         'posts_per_page' => 6,
-        'orderby' => 'date',
-        'order' => 'DESC',
         'paged' => $_POST['paged'],
     ]);
 
     $response = '';
 
     if ($ajaxposts->have_posts()) {
-        while ($ajaxposts->have_posts()) : $ajaxposts->the_post();
-            $response .= get_template_part('parts/card', 'publication');
+        while ($ajaxposts->have_posts()) :
+            $ajaxposts->the_post();
+            $response .= get_template_part('photo-block');
         endwhile;
     } else {
         $response = '';
@@ -60,5 +59,5 @@ function weichie_load_more()
     echo $response;
     exit;
 }
-add_action('wp_ajax_weichie_load_more', 'weichie_load_more');
-add_action('wp_ajax_nopriv_weichie_load_more', 'weichie_load_more');
+add_action('wp_ajax_load_more_posts', 'load_more_posts');
+add_action('wp_ajax_nopriv_load_more_posts', 'load_more_posts');

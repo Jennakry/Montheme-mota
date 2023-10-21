@@ -32,44 +32,60 @@ window.addEventListener('click', function(event){
 
 //FILTRE ET TRI//
 
-jQuery(document).ready(function($) {
-  $('#filtrer').on('click', function() {
-    var catID = $('.custom-select select[name="categorie"]').val();
-    var formatID = $('.custom-select-format select[name="format"]').val();
+// On récupere les éléments select
+const categoriesSelect = document.getElementById("categories");
+const formatsSelect = document.getElementById("formats");
+const datesSelect = document.getElementById("dates");
 
-    // Effectuez la requête AJAX en utilisant catID et formatID comme données à envoyer au serveur.
-    $.ajax({
-      url: ajaxurl, // URL de l'action AJAX
-      type: 'POST',
-      data: {
-        action: 'tri_par_categorie_et_format',
-        cat_id: catID,
-        format_id: formatID
-      },
-      success: function(response) {
-        // Mettez à jour l'interface utilisateur avec les résultats de la requête
-      }
-    });
-  });
-});
+// Écouteurs d'événements pour détecter les changements dans les menus déroulants
+categoriesSelect.addEventListener("change", updateOptions);
+formatsSelect.addEventListener("change", updateOptions);
+datesSelect.addEventListener("change", updateOptions);
+
+// Fonction pour mettre à jour les options en fonction des sélections
+function updateOptions() {
+    // Récupérer les valeurs sélectionnées
+    const selectedCategory = categoriesSelect.value;
+    const selectedFormat = formatsSelect.value;
+    const selectedDate = datesSelect.value;
+
+    // Mettre à jour les options des autres menus en fonction des sélections
+    // Par exemple, vous pouvez ajouter des conditions ici pour filtrer les options en fonction des sélections.
+
+    // Exemple : Si "Mariage" est sélectionné dans Catégories, masquez "Portrait" dans Formats.
+    if (selectedCategory === "1") {
+        formatsSelect.querySelector("option[value='2']").style.display = "none";
+    } else {
+        formatsSelect.querySelector("option[value='2']").style.display = "block";
+    }
+    // Ajoutez des conditions similaires pour les autres filtres.
+
+    // Réinitialisez les menus déroulants aux options par défaut après les mises à jour.
+    categoriesSelect.value = "0";
+    formatsSelect.value = "0";
+    datesSelect.value = "0";
+}
+
+// Réinitialisez les options des menus déroulants au chargement de la page.
+updateOptions();
+
+
 
 // Lire plus
 
-
 let currentPage = 1; // Numéro de la page initiale
-$('#load-more').on('click', function() {
-  currentPage++; // 
+jQuery('#load-more').on('click', function() {
 
   $.ajax({
     type: 'POST',
     url: '/mota/wp-admin/admin-ajax.php',
     dataType: 'html',
     data: {
-      action: 'weichie_load_more',
-      paged: currentPage,
+      action: 'load_more_posts',
+      page: currentPage,
     },
     success: function (res) {
-      $('.publication-list').append(res);
+      $('.photo1').append(res);
     }
   });
 });
