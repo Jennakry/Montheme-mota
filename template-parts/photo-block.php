@@ -47,7 +47,12 @@ get_header(); ?>
 
             ?>
                     <!-- Affichage de la galerie photo -->
-                    <div class="photo1">
+                    <div class="photo1 brightness">
+
+                        <h2 class="info-title"><?php the_title(); ?></h2>
+                        <h3 class="info-tax"><?php echo $categories; ?></h3>
+                        <a href="<?php the_permalink() ?>" aria-label="Voir le détail de la photo" <?php the_title(); ?>" alt="<?php the_title(); ?>" title="Voir le détail de la photo">
+                            <span class="detail-photo"></span></a>
 
                         <?php
                         the_post_thumbnail(); ?>
@@ -56,7 +61,7 @@ get_header(); ?>
 
 
                     <!-- LIGHTBOX -->
-
+                    <?php get_template_part('lightbox'); ?>
 
                 <?php
                 endwhile; ?>
@@ -68,11 +73,11 @@ get_header(); ?>
             // 4. On réinitialise à la requête principale (important)
             wp_reset_postdata();
             ?>
-            <?php get_template_part('lightbox'); ?>
+
     </div>
 
     <!------------------------------ BOUTON  CHARGER PLUS------------------>
-
+    <button class="btn_load-more" id="load-more">Charger plus</button>
 
 
 </section>
