@@ -1,5 +1,16 @@
-<section class="hero-banner">
-    <div class="photoHero">
+<?php
+
+/**
+ * HERO DU HEADER
+ *
+ * @package WordPress
+ * @subpackage Montheme-mota
+ */
+?>
+
+
+<div class="photoHero">
+    <div class="hero-thumbnail">
         <img class="Titre_header" src="<?php echo get_template_directory_uri(); ?>'/assets/images/Titre-header.png'" alt="logo">
         <!-- PHOTO ALEATOIRE -->
         <?php
@@ -16,6 +27,6 @@
         endwhile;
         wp_reset_postdata();
         ?>
-
     </div>
+</div>
 </section>

@@ -4,29 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" type="text/css" href="style.css">
     <!-- FONT SPACE MONO -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
-
+    <!-- IONES FONTAWESOME -->
+    <script src="https://kit.fontawesome.com/e6187c85ca.js" crossorigin="anonymous"></script>
+    <script src="lightbox.js" type="module" defer></script>
     <title>Mota</title>
 
-    <?php wp_head(); ?>
 
+
+    <?php wp_head(); ?>
 </head>
 
-<body class="home blog logged-in admin-bar no-customize-support">
-
-    <body <?php body_class(); ?>>
-        <?php wp_body_open(); ?>
 
 
-        <header>
+<body <?php body_class(); ?>>
+    <?php wp_body_open(); ?>
+    <header>
+        <div class="container-header flexrow">
+            <a href="<?php echo home_url('/'); ?>" aria-label="Page d'accueil de Nathalie Mota">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/Logo.png" alt="Logo <?php echo bloginfo('name'); ?>">
+            </a>
+
+
             <nav role="navigation" aria-label="<?php _e('Menu principal', 'text-domain'); ?>" id="nav" class="active">
 
-                <div class="icons"></div>
-                <!-- Affiche le "Menu princiapal" enregistré au préalable. -->
+                <!-- Affiche le "Menu princiapal" enregistré au préalable et délcaré dans functions.php -->
                 <?php
                 wp_nav_menu([
                     'theme_location' => 'main-menu',
@@ -35,11 +42,17 @@
                 ]);
 
                 ?>
+                <!-- Menu burger mobile -->
+                <button id="modal__burger" class="btn-modal" aria-label="Menu mobile">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </button>
 
 
             </nav>
 
 
-
-            <?php include_once 'template-parts/contact.php'; ?>
-        </header>
+        </div>
+        <?php include_once 'template-parts/contact.php'; ?>
+    </header>

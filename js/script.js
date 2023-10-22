@@ -30,45 +30,6 @@ window.addEventListener('click', function(event){
 
 })
 
-//FILTRE ET TRI//
-
-// On récupere les éléments select
-const categoriesSelect = document.getElementById("categories");
-const formatsSelect = document.getElementById("formats");
-const datesSelect = document.getElementById("dates");
-
-// Écouteurs d'événements pour détecter les changements dans les menus déroulants
-categoriesSelect.addEventListener("change", updateOptions);
-formatsSelect.addEventListener("change", updateOptions);
-datesSelect.addEventListener("change", updateOptions);
-
-// Fonction pour mettre à jour les options en fonction des sélections
-function updateOptions() {
-    // Récupérer les valeurs sélectionnées
-    const selectedCategory = categoriesSelect.value;
-    const selectedFormat = formatsSelect.value;
-    const selectedDate = datesSelect.value;
-
-    // Mettre à jour les options des autres menus en fonction des sélections
-    // Par exemple, vous pouvez ajouter des conditions ici pour filtrer les options en fonction des sélections.
-
-    // Exemple : Si "Mariage" est sélectionné dans Catégories, masquez "Portrait" dans Formats.
-    if (selectedCategory === "1") {
-        formatsSelect.querySelector("option[value='2']").style.display = "none";
-    } else {
-        formatsSelect.querySelector("option[value='2']").style.display = "block";
-    }
-    // Ajoutez des conditions similaires pour les autres filtres.
-
-    // Réinitialisez les menus déroulants aux options par défaut après les mises à jour.
-    categoriesSelect.value = "0";
-    formatsSelect.value = "0";
-    datesSelect.value = "0";
-}
-
-// Réinitialisez les options des menus déroulants au chargement de la page.
-updateOptions();
-
 
 
 // Lire plus
