@@ -28,7 +28,7 @@
                     <!-- Génération automatique de la liste des catégories en fonction de ce qu'il y a dans WP -->
                     <option id="categorie_0" value=""></option>
                     <?php
-                    $categorie_acf = get_terms('categorie-acf', array('hide_empty' => false));
+                    $categorie_acf = get_terms('categories-photos', array('hide_empty' => false));
                     foreach ($categorie_acf as $terms) :
                     ?>
                         <?php if ($terms->term_taxonomy_id == $categorie_id) : ?>
@@ -48,7 +48,7 @@
                     <!-- Génération automatique de la liste des formats en fonction de ce qu'il y a dans WP -->
                     <option id="format_0" value=""></option>
                     <?php
-                    $format_acf = get_terms('format-acf', array('hide_empty' => false));
+                    $format_acf = get_terms('formats', array('hide_empty' => false));
                     foreach ($format_acf as $terms) :
                     ?>
                         <?php if ($terms->term_taxonomy_id == $format_id) : ?>

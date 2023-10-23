@@ -8,7 +8,7 @@ var modal = document.getElementById('myModal');
 // On click sur le lien personalisé "Contact"
 var btn = document.getElementById("menu-item-47");
 
-const btn2= document.querySelectorAll('.myBtn');
+const btn2= document.querySelectorAll('.btn');
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close");

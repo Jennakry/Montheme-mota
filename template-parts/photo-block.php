@@ -50,9 +50,11 @@ get_header(); ?>
                     <div class="photo1 brightness">
 
                         <h2 class="info-title"><?php the_title(); ?></h2>
-                        <h3 class="info-tax"><?php echo $categories; ?></h3>
+
+                        <h3 class="info-tax"><?php echo the_terms(get_the_ID(), 'categories-photos', false); ?></h3>
                         <a href="<?php the_permalink() ?>" aria-label="Voir le détail de la photo" <?php the_title(); ?>" alt="<?php the_title(); ?>" title="Voir le détail de la photo">
                             <span class="detail-photo"></span></a>
+                        <span class="openLightbox"></span>
 
                         <?php
                         the_post_thumbnail(); ?>
@@ -77,8 +79,10 @@ get_header(); ?>
     </div>
 
     <!------------------------------ BOUTON  CHARGER PLUS------------------>
-    <button class="btn_load-more" id="load-more">Charger plus</button>
 
+    <div id="pagination">
+        <button class="btn" id="load-more">Charger plus</button>
+    </div>
 
 </section>
 
