@@ -1,91 +1,74 @@
-/**
- * @property {HTMLElement} element
- */
-  class lightbox {
-    static init(){
-      const links = document.querySelectorAll(
-        'a[href$=".png"], a[href$=".jpg"], a[href$=".jpeg"]');
-      links.forEach(link => link.addEventListener ('click', e =>{
-        e.preventDefault ();
-        new lightbox(e.currentTarget.getAttribute('href')
-)
-      }))
-    }
+// On attend que le document soit prêt
+jQuery(document).ready(function ($) {
 
-    /**
-     * @param {string} url URL de l'image 
-     * 
-     */
-    constructor (url){
-      this.element= this.buildDOM(url);
-      this.onKeyUp = this.onKeyUp.bind(this);
-      this.loadImage(url);
-      document.body.appendChild(this.element);
-      document.addEventListener('keyup', this.onKeyUp);
-    }
+  // Variable pour suivre l'image actuellement visualisée en plein écran
+  let currentImage;
 
-    loadImage (url) {
-      const image = new Image ();
-      const container = this.element.querySelector
-      ('lightbox__container');
-      const loader = document.createElement('div');
-      loader.classList.add('lightbox__container');
-      container.appendChild(loader);
-      image.onload = () => {
-      container.removeChild(loader)
-      container.appendChild(image)
+  // Gestionnaire d'événement pour le clic sur un élément avec la classe 'gallery-fullscreen'
+  $(document).on('click', '.gallery-fullscreen', function (e) {
+    // Empêche le comportement par défaut de l'événement
+    e.preventDefault();
 
-      };
+    // Trouve l'élément parent le plus proche avec la classe 'gallery-item' et le stocke
+    currentImage = $(this).closest('.photo1');
 
-      image.src  = url;
-    }
+    // Récupère l'URL de l'image et d'autres données associées à l'élément cliqué
+    const imgSrc = $(this).data('src');
+    const imgReference = $(this).data('reference'); // Récupère la référence
+    const imgCategory = currentImage.find('.gallery-category').text();
+    const imgTitle = currentImage.find('.info-title').text(); // Récupère le titre
 
-  /** Ferme la lightbox en faisant echap au clavier
-     * @param {KeyboardEvent} e
-     * 
-     */ 
-    onKeyUp (e){
-      if (e.key === 'Escape'){
-      this.close(e);
+    // Met à jour la lightbox avec les données récupérées
+    $('.lightbox .lightbox-content img').attr('src', imgSrc);
+    $('.lightbox .lightbox-title').text(imgTitle); // Affiche le titre
+    $('.lightbox .lightbox-reference').text(imgReference);
+    $('.lightbox .lightbox-category').text(imgCategory);
 
-    }
-  }
-    /** Ferme la lightbox au click sur la croix
-     * @param {MouseEvent} e
-     * 
-     */ 
+    // Ajout de classes pour afficher la lightbox et empêcher le défilement du corps
+    $('body').addClass('no-scroll');
+    $('.lightbox').addClass('lightbox-visible');
+  });
 
-    close(e) {
-      e.preventDefault ();
-      this.element.classList.add('fadeOut');
-      window.setTimeout(() => {
-        this.elementnt.parentElement.removeChild(this.element);
-      }, 500);
-      document.removeEventListener('keyup', this.onKeyUp);
-    }
-
-    /**
-     * @param {string} url URL de l'image 
-     * @return {HTMLElement}
-     */
-    buildDOM(url){
-      const dom = document.createElement('div');
-      dom.classList.add('lightbox');
-      dom.innerHTML = 
-      <button class="lightbox__close">Fermer</button>
-      <button class="lightbox__next">Suivant</button>
-      <button class="lightbox__prev">Précédent</button>
-      <div class="lightbox__container">
-      <div class="photo1"></div>
+  // Gestionnaire d'événement pour le clic sur le bouton 'Suivant' de la lightbox
+  $(document).on('click', '.lightbox-next', function () {
+    // Récupère l'élément suivant avec la classe 'gallery-item'
+    let nextImage = currentImage.next('.photo1');
     
-      </div>;
+    // Si on est à la dernière image, on revient à la première
+    if (!nextImage.length) {
+      nextImage = $('.photo1').first();
+    }
+    currentImage = nextImage;
+    const nextLink = nextImage.find('.gallery-fullscreen');
+    nextLink.click();
 
-      dom.querySelector('lightbox__close').addEventListener('click',
-      this.close.bind(this) )
-      return dom;
-   }
+    // Réajustement de la classe pour empêcher le défilement
+    $('body').removeClass('no-scroll').addClass('no-scroll');
+  });
 
-  }
+  // Gestionnaire d'événement pour le clic sur le bouton 'Précédent' de la lightbox
+  $(document).on('click', '.lightbox-prev', function () {
+    // Récupère l'élément précédent avec la classe 'gallery-item'
+    let prevImage = currentImage.prev('.photo1');
+    
+    // Si on est à la première image, on revient à la dernière
+    if (!prevImage.length) {
+      prevImage = $('.photo1').last();
+    }
+    currentImage = prevImage;
+    const prevLink = prevImage.find('.gallery-fullscreen');
+    prevLink.click();
 
-  
-lightbox.init();
+    // Réajustement de la classe pour empêcher le défilement
+    $('body').removeClass('no-scroll').addClass('no-scroll');
+  });
+
+  // Gestionnaire d'événement pour le clic sur le bouton 'Fermer' de la lightbox
+  $(document).on('click', '.lightbox-close', function () {
+    // Masque la lightbox
+    $('.lightbox').removeClass('lightbox-visible');
+
+    // Suppression de la classe pour permettre le défilement
+    $('body').removeClass('no-scroll');
+  });
+});

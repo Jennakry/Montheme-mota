@@ -1,196 +1,84 @@
-// Script pour gérer les filtres d'affichage en page d'accueil
-//
-console.log("Script filtres en ajax lancé !!!");
+// Attente que le document soit prêt
+jQuery(function ($) {
 
-/**
- * Variables récupérées / renvoyées
- *
- * nonce : jeton de sécurité
- * ajaxurl : adresse URL de la fonction Ajax dans WP
- *
- * categorie_id : n° de la catégorie demandée ou vide si on ne filtre pas par catégorie
- * format_id : n° du format demandé ou vide si on ne filtre pas par format
- * order : ordre de tri Croissant (ASC) ou Décroissant (DEC)
- * orderby : actuellement on trie par la date mais on pourrait éventuellement avoir un autre critère
- * currentPage : page affichée au moment de l'utilisation du script
- * max_pages : page maximum en fonction des filtres
- * nb_total_posts : nombres de photos à afficher
- *
- */
+  // Initialisation de la variable de pagination
+  let page = 1;
 
-document.addEventListener("DOMContentLoaded", function () {
-  const body = document.querySelector("body");
-  const allDashicons = document.querySelectorAll(".dashicons");
-  const allSelect = document.querySelectorAll("select");
-  const message = "<p>Désolé. Aucun article ne correspond à cette demande.<p>";
+  // Gestionnaire d'événement pour les changements de filtres
+  $('#filter-category, #filter-format, #filter-tri').change(function () {
 
-  // Initialisation des variables des filtres au premier affichage du site
-  let categorie_id = "";
-  if (document.getElementById("categorie_id")) {
-    document.getElementById("categorie_id").value = "";
-  }
-  let format_id = "";
-  if (document.getElementById("format_id")) {
-    document.getElementById("format_id").value = "";
-  }
-  let order = "";
-  if (document.getElementById("date")) {
-    document.getElementById("date").value = "";
-  }
+    // Réinitialisation de la pagination à chaque changement de filtre
+    page = 1;
 
-  let currentPage = 1;
-  let max_pages = 1;
-  let selectId = "";
+    // Récupération des valeurs des filtres
+    const category = $('#filter-category').val();
+    const format = $('#filter-format').val();
+    const sort = $('#filter-tri').val();
 
-  document.getElementById("currentPage").value = 1;
+    // Modification du bouton pour indiquer un état de chargement
+    $('#load-more').text("Chargement...").prop("disabled", true);
 
-  // Gestion du déplacement des filtres horizontalement
-  const swiper = new Swiper(".swiper-container", {
-    freeMode: true,
-    grabCursor: true,
-    breakpoints: {
-      1200: {
-        grabCursor: false,
-        allowTouchMove: false,
+    // Requête AJAX pour filtrer les photos
+    $.ajax({
+      url: 'http://localhost/mota/'
+      type: 'POST',
+      data: {
+      action: 'filter_photos',
+      category: category,
+      format: format,
+      tri: tri
       },
-    },
-  });
+      success: function (response) {
 
-  (function ($) {
-    $(document).ready(function () {
-      $(".option-filter").change(function (e) {
-        // Empêcher l'envoi classique du formulaire
-        e.preventDefault();
+        // Remplacement du contenu actuel de la galerie par le nouveau contenu filtré
+        $('.gallery').html(response);
 
-        // Récupération du jeton de sécurité
-        const nonce = $("#nonce").val();
-
-        // Récupération de l'adresse de la page	pour pointer Ajax
-        const ajaxurl = $("#ajaxurl").val();
-
-        if (document.getElementById("max_pages") !== null) {
-          max_pages = document.getElementById("max_pages").value;
-        }
-
-        // Récupération des valeurs sélectionnées
-        let targetName = e.target.name;
-        let targetValue = e.target.value;
-
-        // Réaffectation de la valeur dans la variable correspondante
-        if (targetName === "categorie_id") {
-          categorie_id = targetValue;
-        }
-        if (targetName === "format_id") {
-          format_id = targetValue;
-        }
-        if (targetName === "date") {
-          order = targetValue;
-        }
-
-        let orderby = "date";
-
-        // Génération du nouvel affichage
-        $.ajax({
-          type: "POST",
-          url: ajaxurl,
-          dataType: "html", // <-- Change dataType from 'html' to 'json'
-          data: {
-            action: "nathalie_mota_load",
-            nonce: nonce,
-            paged: 1,
-            categorie_id: categorie_id,
-            format_id: format_id,
-            orderby: orderby,
-            order: order,
-          },
-          success: function (res) {
-            $(".publication-list").empty().append(res);
-            // Récupération de la valeur du nouveau nombre de pages
-            let max_pages = document.getElementById("max_pages").value;
-            let nb_total_posts = 0;
-
-            // Affiche ou cache le bouton "Charger plus" en fonction du nombre de pages
-            if (currentPage >= max_pages) {
-              $("#load-more").addClass("hidden");
-            } else {
-              $("#load-more").removeClass("hidden");
-            }
-
-            // Contrôle s'il y a des photos à afficher
-            if (document.getElementById("nb_total_posts") !== null) {
-              nb_total_posts = document.getElementById("nb_total_posts").value;
-            }
-
-            // Et affiche un message s'il n'y a aucune photo à afficher
-            if (nb_total_posts == 0) {
-              $(".publication-list").append(message);
-            }
-
-            // Réinitialisation du n° de page affiché
-            document.getElementById("currentPage").value = 1;
-          },
-        });
-      });
-    });
-  })(jQuery);
-
-  // Réinitialisation des flèches des select si on click en dehors
-  body.addEventListener("click", (e) => {
-    if (e.target.tagName != "select" && e.target.tagName != "SELECT") {
-      initArrow();
-    }
-  });
-
-  // Fonction pour rechercher un mot dans une variable
-  // retourne vrai si le mot est trouvé, si non retourne false
-  function findWord(word, str) {
-    return RegExp("\\b" + word + "\\b").test(str);
-  }
-
-  // Réinitialisation de l'affichage des flèches sur les select
-  const initArrow = () => {
-    console.log("Initialisation des fleches");
-    allDashicons.forEach((dashicons) => {
-      dashicons.classList.add("select-close");
-      dashicons.classList.remove("select-open");
-    });
-  };
-
-  // Passer de la flèche qui descend à la flèqhe qui monte
-  // et inversement
-  // et force la flèche qui descend sur les 2 autres selects
-  const arrow = (arg) => {
-    allDashicons.forEach((dashicons) => {
-      if (findWord(arg, dashicons.className)) {
-        if (
-          findWord("select-close", dashicons.className) ||
-          findWord("select-open", dashicons.className)
-        ) {
-          // initArrow();
-          if (findWord("select-close", dashicons.className)) {
-            dashicons.classList.remove("select-close");
-            dashicons.classList.add("select-open");
-          } else {
-            dashicons.classList.add("select-close");
-            dashicons.classList.remove("select-open");
-          }
+        // Vérifie si la réponse n'est pas vide
+        // Si c'est le cas, on réactive le bouton "Charger plus"
+        // Sinon, on indique qu'aucune photo n'a été trouvée
+        if (response.trim() !== "") {
+          $('#load-more').text("Charger plus").prop("disabled", false);
+        } else {
+          $('#load-more').text("Aucune photo trouvée").prop("disabled", true);
         }
       }
     });
-  };
+  });
 
-  // Détection du click sur un select
-  // et modification de la flèche correpondante
-  allSelect.forEach((select) => {
-    select.addEventListener("click", (e) => {
-      e.preventDefault();
+  // Gestionnaire d'événement pour le bouton "Charger plus"
+  $('#load-more').click(function () {
+    const category = $('#filter-category').val();
+    const format = $('#filter-format').val();
+    const tri = $('#filter-tri').val();
 
-      // On contrôle si on a clické dans un autre select
-      if (select.id != selectId) {
-        initArrow();
+    // Indication d'un état de chargement pour le bouton
+    $('#load-more').text("Chargement...").prop("disabled", true);
+
+    // Incrémentation de la pagination pour charger les éléments suivants
+    page++;
+
+    // Requête AJAX pour charger plus de photos
+    $.ajax({
+      url: frontendajax.ajaxurl,
+      type: 'POST',
+      data: {
+        action: 'filter_photos',
+        category: category,
+        format: format,
+        sort: sort,
+        page: page
+      },
+      success: function (response) {
+
+        // Si la réponse contient des photos, elles sont ajoutées à la galerie
+        if (response.trim() !== "" && !response.includes("Aucune photo trouvée")) {
+          $('.gallery').append(response);
+          $('#load-more').text("Charger plus").prop("disabled", false);
+        } else {
+          // Sinon, on indique qu'il n'y a pas d'autres photos à charger
+          $('#load-more').text("Aucune autre photo").prop("disabled", true);
+        }
       }
-      selectId = select.id;
-      arrow(selectId);
     });
   });
 });

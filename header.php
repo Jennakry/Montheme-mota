@@ -12,7 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet">
     <!-- IONES FONTAWESOME -->
     <script src="https://kit.fontawesome.com/e6187c85ca.js" crossorigin="anonymous"></script>
-    <script src="lightbox.js" type="module" defer></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/js/filtre.js" type="module" defer></script>
+    <script src="<?php echo get_template_directory_uri(); ?>/js/lightbox.js" type="module" defer></script>
     <title>Mota</title>
 
 
@@ -31,7 +32,7 @@
             </a>
 
 
-            <nav role="navigation" aria-label="<?php _e('Menu principal', 'text-domain'); ?>" id="nav" class="active">
+            <nav role="navigation" aria-label="<?php _e('Menu principal', 'text-domain'); ?>" id="nav" class="active open">
 
                 <!-- Affiche le "Menu princiapal" enregistré au préalable et délcaré dans functions.php -->
                 <?php
@@ -48,6 +49,16 @@
                     <span class="line"></span>
                     <span class="line"></span>
                 </button>
+
+                <div id="modal__content" class="modal__content">
+                    <?php
+                    wp_nav_menu([
+                        'theme_location' => 'main-menu',
+                        'container' => 'false',
+                    ]);
+                    ?>
+                </div>
+
 
 
             </nav>

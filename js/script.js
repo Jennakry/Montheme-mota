@@ -30,7 +30,25 @@ window.addEventListener('click', function(event){
 
 })
 
+//MENU BURGER
 
+      jQuery(function ($) {
+        $(function () {
+      
+      $(".btn-modal").click(function (e) {
+        $(".modal__content").toggleClass("animate-modal");
+        $(".modal__content").toggleClass("open");
+        $(".btn-modal").toggleClass("close");
+      });
+      $("a").click(function () {
+        if ($(".modal__content").hasClass("open")) {
+          $(".modal__content").removeClass("animate-modal");
+          $(".modal__content").removeClass("open");
+          $(".btn-modal").removeClass("close");
+        }
+      });
+    });
+  });
 
 // Lire plus
 
@@ -52,32 +70,6 @@ jQuery('#load-more').on('click', function() {
 });
 
 
-//HEADER MOBILE
-
-icons.addEventListener('click'), ()  => {
-nav.classList.toggle("active")
-}
-
-// window.onload=function(){
-//     var bouton = document.getElementById('btnMenu');
-//     var nav = document.getElementById('nav');
-//     bouton.onclick = function(e){
-//         if(nav.style.display=="block"){
-//             nav.style.display="none";
-//         }else{
-//             nav.style.display="block";
-//         }
-//     };
-// };
-  
-// const burgerButton = document.querySelector('#btnMenu');
-// const navigation = document.querySelector('.menu-mobile');
 
 
-// burgerButton.addEventListener('click', toggleNav);
-
-// function toggleNav () {
-//   burgerButton.classList.toggle("active");
-//   navigation.classList.toggle("active");
-// }
 

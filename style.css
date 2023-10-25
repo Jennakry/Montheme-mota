@@ -101,6 +101,8 @@ footer {
 }
 
 /*HEADER MOBILE */
+
+
 .btn-modal {
     opacity: 1;
     position: absolute;
@@ -141,6 +143,65 @@ footer {
 
 .btn-modal.close  span.line:last-child {
     transform: rotate(-45deg) translate3d(8px, -6px, 0);
+  }
+  .modal__content {
+    position: absolute;
+    right: 0;
+    opacity: 0;
+    top: 70px;
+    width: 100vw;
+    height: 0;
+    background: #E00000; 
+    visibility: hidden;
+    transition: all .3s ease-in-out;
+}
+
+#modal__content .menu-header-menu-container {
+    margin: auto;
+    height: auto;
+    width: 100vw;
+}
+
+#modal__content .menu-header-menu-container ul,
+#modal__content .menu-header-menu-container li {  
+    display: flex;  
+    justify-content: center;
+    text-align: center;    
+    /* align-items: center */
+}
+
+#modal__content .menu-header-menu-container ul {    
+    flex-direction: column;
+    justify-content: space-around;    
+    padding: 35px 20px 25px;
+}
+
+#modal__content .menu-header-menu-container li {   
+    height: 80px;
+}
+
+#modal__content a {
+    color: white;
+    font-size: 23px;
+}
+
+.animate-modal {
+    opacity: 1;
+    /* width: 100vw; */
+    height: auto;  
+    animation: move-down 2s 300ms both;
+}
+
+/* Pour faire apparaitre la moadle en descendant et avec agmentatation de l'opacité */
+@keyframes move-down {
+    0% {
+      transform: translateY(-400px);
+      opacity: 0;
+    }  
+    100% {
+      transform: translateY(0);
+      visibility: visible;
+    }
   }
 
 
@@ -389,8 +450,8 @@ button:hover {
     font-weight: 400px!important;
 }
 
-/*------------------------------------------------- PHOTO BLOCK (page d'accueil)--------------------------------------------*/
-.contain-photos {
+/*------------------------------------------------- PHOTO BLOCK (gallerie d'images)--------------------------------------------*/
+.gallery {
     display:flex;
     flex-wrap:wrap;
     justify-content:center;
@@ -525,105 +586,48 @@ font-weight: 700;
 }
 
 /*****************************FILTRE et tri (filtre.php)************************/
+.filters {
+    display: flex;
+    margin-bottom: 39px;
 
-form {    
-    flex-wrap: nowrap;
-}
+  }
 
-.filter-area {
-    width: 80%;
-    min-width: 125px;
-    max-width: 1150px;
-    margin: auto;
-    overflow: hidden;
-}
+.filters ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
 
-.filter-area form {display:flex;
-    justify-content: space-between; 
-    padding: 40px 0;
-}    
-    
-.filter-area .filterleft {
-    gap: 20px;
-    width: 560px !important; 
-}
-    
-.filter-area .filterright  {
-    width: 275px !important;
-} 
-    
-.filter-area .filterleft,
-.filter-area .filterright  {
-    justify-content: center;
-} 
-
-.filter-area p,
-.filter-area option {    
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-}
-
-.filter-area p {
-    text-transform: uppercase;
-}
-
-.filter-area option {
-    text-transform: capitalize;
-}
-
-.filter-area select,
-.filter-area #date {
-    height: 40px !important;
-}
-
-.filter-area .select-filter {
-    width: 270px;
+  .filters .filter {
     position: relative;
-    display: inline-block;
-}
+  }
 
-.filter-area .option-filter {
-    width: 100%;
-    height: 40px;
-    border: 1px solid #000000;
-    background-color: #ffffff;
-    border-radius: 0;
-    padding: 0 24px;
-}
+  .filters .filter:nth-child(2) {
+    margin-left: 36px;
+  }
+  .filters .filter:nth-child(3) {
+    margin-left: auto;
+  }
+  .filters .filter-category,
+  .filters .filter-format,
+  .filters .filter-sort {
+    height: 43px;
+    width: 260px;
+    padding: 0 18px;
+    font-family: "poppins";
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.36px;
+    color: #313144;
+    border-radius: 8px;
+    border: 1.3px solid #B8BBC2;
+    background: transparent;
+    appearance: none; /* Efface la flèche par défaut pour certains navigateurs */
+    
+  }
+  
 
-/* On cache la flèche d'origne des sélecteurs car non modifiable */
-.filter-area select { 
-    appearance: none;
-}
-
-/* supprimer la fléche par défaut en IE 10 et 11 */
-.filter-area select::-ms-expand {
-    display: none; 
-}
-
-.filter-area .dashicons {  
-    /* width: 9px; */
-    /* height: 7px;   */
-    position: absolute;
-    display: inline-block;
-    top: 32px;
-    right: 15px;
-}
-
-.select-open {
-    transition: all 0.3s ease;
-    transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    -webkit-transform: rotate(180deg); 
-}
-
-.select-close {
-    transition: all 0.3s ease;
-    transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg); 
-}
 
 /************************HERO BANNER (banner.php)*****************************************************/
 
@@ -657,98 +661,141 @@ form {
     transform: translate3d(-50%, -50%, 0);
 }
 
-/* LIGHTBOX*/
+/************************************ LIGHTBOX*******************************/
 
 
 
 .lightbox {
+
+    display: none;
     position: fixed;
     top: 0;
-    left:0;
+    left: 0;
     width: 100%;
-    height:100%;
-    background-color: rgba(0, 0, 0, .9);
-    z-index: 10;
-    overflow: auto;
-    animation: lightboxIn .5s;
-    transition: opacity .3s;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+      
 }
 
-.lightbox__next,
-.lightbox__prev  {
-border:none;
-background: url("/mota/wp-content/themes/Montheme-mota/assets/images/fleche-lightbox.png") center center /45px 28px no-repeat;
-width: 50px;
-height:100%;
-position:fixed;
-top: 0;
-right:6%;
-margin-top: -14px;
-z-index:11;
-text-indent: -3000px;
-cursor:pointer;
-}
+.lightbox.lightbox-visible {
+    display: flex;
+  }
 
-.lightbox__prev {
-    right: auto;
-    left:0;
-    transform: rotate(180deg);
-}
-
-.lightbox__close {
-    width: 20px;
-    height: 20px;
-background: url("/mota/wp-content/themes/Montheme-mota/assets/images/close-lightbox.png")center center /45px 28px no-repeat transparent;
-position: fixed;
-text-indent: -3000px;
-top: 100px;
-right: 100px;
-z-index:12;
-
-}
-
-.lightbox button {
-    opacity: .5;
+  .lightbox-close,
+  .lightbox-next,
+  .lightbox-prev {
+    position: absolute;
     cursor: pointer;
-    transition: opacity .3s;
-}
-.lightbox button:hover {
-    opacity: 1;
-}
-
-.lightbox__container img {
-    max-width: 100%;
-    height:auto;
-    animation: lightboxIn .5s;
-}
-
-
-.lightbox__container {
-    display:flex;
-    align-items: center;
+    color: #fff;
+  }
+  .lightbox-close {
+    z-index: 1;
+    top: 30px;
+    right: 50px;
+    display: flex;
     justify-content: center;
-    min-height: 100vh;
-    margin-left: 50px;
-    margin-right: 50px;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+  }
+  
+  .lightbox-next {
+    bottom: 50%;
+    right: 120px;
+    background-color: transparent;
+    border: none;
+  }
+  
+  .lightbox-prev {
+    bottom: 50%;
+    left: 120px;
+    background-color: transparent;
+    border: none;
+  }
+  
+  .lightbox-content {
+    position: relative;
+    margin: auto;
+  }
+  .lightbox-content img {
+    width: 100%;
+    max-height: 60vh;
+    object-fit: cover;
+  }
+  .lightbox-content .lightbox-title,
+  .lightbox-content .lightbox-category,
+  .lightbox-content .lightbox-reference {
+    position: absolute;
+    text-transform: uppercase;
+  }
+  .lightbox-content .lightbox-title {
+    left: 0;
+    bottom: -28px;
+  }
+  .lightbox-content .lightbox-reference {
+    left: 0;
+    bottom: -52px;
+  }
+  .lightbox-content .lightbox-category {
+    right: 0;
+    bottom: -28px;
+  }
+
+/*  **********************************  */
+/*    Media query : max-width: 1200px    */
+/*  **********************************  */
+
+@media screen and (max-width: 1200px) {
+ 
+    .container-header {
+        width: 90vw;
+
+   }
+    .photHero img {    
+        max-height: 866px;
+    }
+    .photoHero .Titre_header{
+        left:40%;
+    }
+
+    .contain-photos .photo1  {
+        width: 465px;
+        height: 400px;
+    }
+    .filters{
+        width: 100%;
+        padding: 0 20px;
+    }        
 
 }
-@keyframes lightboxIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+
+/*  **********************************  */
+/*    Media query : max-width: 1023px    */
+/*  **********************************  */
+
+@media screen and (max-width: 1023px) {
+    
+    header {
+        height: 70px;
+    }
+
+    .photoHero img {    
+        max-height: 766px;
+    }
+    
+    .photoHero .Titre_header {
+        left: 35%;
+    }
+
+    .contain-photos .photo1 {
+        width: 365px;
+        height: 300px;
+    }    
+
 }
-
-
-.lightbox__loader {
-    width: 38px;
-    height: 38px;
-    opacity: .5;
-    background:url(assets/images/loader.svg) center center no-repeat;
-}
-
-.lightbox.fadeOut {
-    opacity: 0;
-}
-
 
 
 
@@ -757,48 +804,66 @@ z-index:12;
 /*  **********************************  */
 @media all and (max-width: 768px) {
     .container-header img {
-    width: 138px;
+        width: 138px;
+        }
+    
+        #menu-menu-header {
+            opacity: 0;
+        }
+    
+        .menu-menu-header1 a{
+            display: block;
+            transform: translateY(-200px);
+            height: 0;
+        }
+    
+        #modal__content .menu-menu-header1 {
+            opacity: 1;
+            height: auto;
+        }
+        
+        #modal__content .menu-menu-header1 a{
+            display: block;
+            transform: translateY(0);
+            height: 0;
+        }
+        
+        #modal__burger {
+            opacity: 1;
+            top: 0;
+        }
+    
+        #nav .menu-menu-header1,
+        #nav #modal__burger {
+            margin-right: 0;
+        }
+    
+    .hero-content-banner {   
+        max-width: 768px;
+        max-height:500px;
     }
 
-    #navigation .menu-header-menu-container {
-        opacity: 0;
+    .hero-content-banner img {   
+        max-width: 768px;
+        max-height:500px;
+    }
+    
+    .hero-content-banner .Titre_header {
+        left:50%;
     }
 
-    #navigation .menu-header-menu-container a{
-        display: inline-block;
-        transform: translateY(-200px);
-        height: 0;
+    .contain-photos .photo1 {
+        width: 293px;
+        
+    }  
+
+    .photo1 h2,
+    .photo1 h3,
+    .photo1 p {      
+        font-size: 12px !important;
+        line-height: 18px;  
     }
 
-    #modal__content .menu-header-menu-container {
-        opacity: 1;
-        height: auto;
-    }
-    
-    #modal__content .menu-header-menu-container a{
-        display: inline-block;
-        transform: translateY(0);
-        height: 0;
-    }
-    
-    #modal__burger {
-        opacity: 1;
-        top: 0;
-    }
-
-    #navigation .menu-header-menu-container,
-    #navigation #modal__burger {
-        margin-right: 0;
-    }
-    
-    .hero-area img {   
-        max-height: 500px;
-    }
-    
-    .hero-area .title-hero {
-        font-size: 40px;
-        line-height: 80px;
-    }
 
     #footer {
         border-top: 1px solid #000000;
@@ -822,48 +887,31 @@ z-index:12;
     margin-bottom: 25px;
     }
 
-    .container-news .news-info {
-        width: 293px;
-        height: 260px;
-    }  
+    
 
-    .news-info h2,
-    .news-info h3,
-    .news-info p {      
-        font-size: 12px !important;
-        line-height: 18px;  
-    }
+    .filters .filter-format{
+        width: 190px;
+
+    }        
 
 }
 
+/*  **********************************  */
+/*    Media query : max-width: 580px    */
+/*  **********************************  */
+@media all and (max-width: 580px) {
+    .filters {
+        width: 180px;
+    }
 
+    .photo1 h2,
+    .photo1 h3,
+    .photo1 p {      
+        font-size: 10px !important;
+        line-height: 14px !important;  
+    }
+}
 
-
-    /* #icons {
-        display:block;
-   
-
-    nav ul {
-        position: fixed;
-        left: -100%;
-        top: 5%;
-        flex-direction:column;
-        background-color:#E00000;
-        width: 100%;
-        text-align:center;
-        transition: 0.25s;
-        } */
-
-      
-
-    /* nav.active ul {
-            left: 0px;
-        }
-    } */ */
-
-
-
-  */
 
    
 

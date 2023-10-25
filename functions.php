@@ -28,7 +28,6 @@ if (is_front_page()) {
 //Déclare le JQUERY ET JAVASCRIPT//
 function theme_enqueue_scripts()
 {
-    wp_enqueue_script('jquery'); // On annule l'inscription du jQuery de WP
     wp_enqueue_script('scripts-1', get_stylesheet_directory_uri() . '/js/script.js', array('jquery'), '1.0', true);
 }
 
