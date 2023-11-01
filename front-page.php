@@ -33,7 +33,9 @@
                 <?php endif; ?>
 
             </section>
-            <button id="load-more" class="load-more">Charger plus</button>
+            <div class="load-more">
+                <button id="load-more">Charger plus</button>
+            </div>
 </main>
 
 <?php get_footer(); ?>

@@ -5,7 +5,7 @@
     <div>
         <h2 class="info-title"><?php the_title(); ?></h2>
 
-        <h3 class="info-tax gallery-category"><?php echo the_terms(get_the_ID(), 'categorie-photos', '', ', '); ?></h3>
+        <h3 class="info-tax gallery-category"><?php echo the_terms(get_the_ID(), 'categories-photos', false); ?></h3>
 
         <a href="<?php the_permalink(); ?>" aria-label="Voir le détail de la photo" class="detail-photo"></a>
 

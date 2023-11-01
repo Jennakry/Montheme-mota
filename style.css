@@ -377,53 +377,36 @@ footer {
     border-bottom: 1px solid #000;
    
 }
-/* BOUTON CONTACT*/
+/* BOUTON PAGE SINGLE-PHOTO*/
 
+button {
+    border: none;
+    width: 272px;
+    height: 50px;
+ }
 
 .btn  {
-    border-radius: 2px;
-    padding: 8px 15px 8px 15px;
     background-color: #D8D8D8;
-    color: black;
-
 }
 .btn a {font-size: 12px;}
 
-
- button {
+.load-more{display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
     cursor: pointer;
     border: none;
-    background: transparent;
     padding: 10px;
     width: 272px;
     height: 50px;
  }
+ #load-more:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+  }
+  
  
-.section3 {
-    margin-top: 50px;
-    
-}
-button:hover {
-    color:#ffffff;
-    
-
-}
-
-.photo_choix {display:flex;
-    gap: 20px;
-}
-
-.photo_avant a , .photo_apres a {
-
-    display:block;
-}
-.left:hover {
-    color:black;
-
-}
-.photo_avant  , .photo_apres {
-    text-align:center;
-}
 
 /*------------------------------------------------------- BLOCK-SINGLE (section 3)----------------------------------------------------------------------*/
 .photo_aleatoire {
@@ -450,6 +433,10 @@ button:hover {
     font-weight: 400px!important;
 }
 
+.section3 {
+    margin-top: 50px;
+    
+}
 /*------------------------------------------------- PHOTO BLOCK (gallerie d'images)--------------------------------------------*/
 .gallery {
     display:flex;
@@ -542,8 +529,8 @@ text-transform: uppercase;
     content: "";
     position: absolute;
     background-color: #000000;
-    width: 564px;
-    height: 495px;
+    width: 100%;
+    height: 100%;
     opacity: 0;  
     transition: all 0.5s ease-in-out;
 }
@@ -568,11 +555,6 @@ text-transform: uppercase;
 }
 
 
-
-.btn-all-photos a {
-    text-transform: none;
-}
-
 .contact {
     text-transform: none;
    
@@ -584,6 +566,11 @@ font-weight: 700;
 #contact_btn:hover{
     color:#fefefe;
 }
+
+#all-photos:hover{
+    color:#fefefe;
+}
+
 
 /*****************************FILTRE et tri (filtre.php)************************/
 .filters {
@@ -606,11 +593,11 @@ font-weight: 700;
     margin-left: 36px;
   }
   .filters .filter:nth-child(3) {
-    margin-left: auto;
+    margin-left: 325px;
   }
   .filters .filter-category,
   .filters .filter-format,
-  .filters .filter-sort {
+  .filters .filter-tri {
     height: 43px;
     width: 260px;
     padding: 0 18px;
@@ -633,7 +620,6 @@ font-weight: 700;
 
 .hero-content-banner {
     width: 1440px;
-    height: 962px;
     margin-bottom: 20px;
     margin-top: 20px;
     z-index: 100;
@@ -690,16 +676,12 @@ font-weight: 700;
     color: #fff;
   }
   .lightbox-close {
+    background: url("./assets/images/close-lightbox.png") center center / 100% 100%;
     z-index: 1;
-    top: 30px;
-    right: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    height: 50px;
-    background-color: transparent;
-    border: none;
+    top: 100px;
+    right: 100px;
+    width: 30px;
+    height: 30px;
   }
   
   .lightbox-next {
@@ -737,7 +719,7 @@ font-weight: 700;
   }
   .lightbox-content .lightbox-reference {
     left: 0;
-    bottom: -52px;
+    bottom: -28px;
   }
   .lightbox-content .lightbox-category {
     right: 0;
@@ -754,16 +736,18 @@ font-weight: 700;
         width: 90vw;
 
    }
-    .photHero img {    
-        max-height: 866px;
+    .hero-content-banner img {    
+        width: 1200px;
+       
     }
-    .photoHero .Titre_header{
-        left:40%;
+    .photoHero .Titre_header {
+        left: 42%;
     }
-
+   
     .contain-photos .photo1  {
-        width: 465px;
-        height: 400px;
+        gap:20px;
+        width: 560px;
+        height: 495px;
     }
     .filters{
         width: 100%;
@@ -803,9 +787,18 @@ font-weight: 700;
 /*    Media query : max-width: 768px    */
 /*  **********************************  */
 @media all and (max-width: 768px) {
+
+    nav ul {
+        display: flex;
+        flex-direction: column;}
+
     .container-header img {
         width: 138px;
         }
+        .contain-photos .photo1 {
+            width: 365px;
+            height: 300px;
+        }    
     
         #menu-menu-header {
             opacity: 0;
@@ -815,6 +808,10 @@ font-weight: 700;
             display: block;
             transform: translateY(-200px);
             height: 0;
+        }
+        .gallery {
+            flex-direction : column;
+            gap: 211px;
         }
     
         #modal__content .menu-menu-header1 {
@@ -852,10 +849,7 @@ font-weight: 700;
         left:50%;
     }
 
-    .contain-photos .photo1 {
-        width: 293px;
-        
-    }  
+
 
     .photo1 h2,
     .photo1 h3,

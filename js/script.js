@@ -50,24 +50,6 @@ window.addEventListener('click', function(event){
     });
   });
 
-// Lire plus
-
-let currentPage = 1; // Numéro de la page initiale
-jQuery('#load-more').on('click', function() {
-
-  $.ajax({
-    type: 'POST',
-    url: '/mota/wp-admin/admin-ajax.php',
-    dataType: 'html',
-    data: {
-      action: 'load_more_posts',
-      page: currentPage,
-    },
-    success: function (res) {
-      $('.photo1').append(res);
-    }
-  });
-});
 
 
 

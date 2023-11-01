@@ -47,7 +47,8 @@ get_header();
                         <?php if (has_post_thumbnail()) : ?>
 
                             <img src="<?php the_post_thumbnail_url(array(500, 500)); ?>" alt="<?php the_title_attribute(); ?>" class="post-thumbnail">
-                            <span class="openLightbox"></span>
+
+
                         <?php endif; ?>
                     </div>
 

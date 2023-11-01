@@ -1,84 +1,76 @@
-// Attente que le document soit prêt
-jQuery(function ($) {
+jQuery(document).ready(function($) {
+
+  console.log('filtre.js loaded');
 
   // Initialisation de la variable de pagination
   let page = 1;
 
   // Gestionnaire d'événement pour les changements de filtres
-  $('#filter-category, #filter-format, #filter-tri').change(function () {
-
+  $('#filter-category, #filter-format, #filter-tri').on('change', function() {
     // Réinitialisation de la pagination à chaque changement de filtre
     page = 1;
 
     // Récupération des valeurs des filtres
-    const category = $('#filter-category').val();
-    const format = $('#filter-format').val();
-    const sort = $('#filter-tri').val();
+    const categoriesPhotos = $('#filter-category').val();
+    const formats = $('#filter-format').val();
+    const tri = $('#filter-tri').val();
+
+    // Envoi de la requête AJAX pour filtrer les photos
+    sendAjaxRequest(categoriesPhotos, formats, tri, page);
+  });
+
+  // Gestionnaire d'événement pour le bouton "Charger plus"
+  $('#load-more').on('click', function() {
+    console.log('Load more clicked');
+    // Incrémentation de la pagination pour charger les éléments suivants
+    page++;
+
+    console.log('Charging more, current page:', page);
+    // Récupération des valeurs des filtres
+    const categoriesPhotos = $('#filter-category').val();
+    const formats = $('#filter-format').val();
+    const tri = $('#filter-tri').val();
+
+    // Envoi de la requête AJAX pour charger plus de photos
+    sendAjaxRequest(categoriesPhotos, formats, tri, page);
+  });
+
+  // Fonction pour envoyer une requête AJAX
+  function sendAjaxRequest(categoriesPhotos, formats, tri, page) {
+    // Construction des données à envoyer
+    const data = {
+      'action': 'filter_photos',
+      'nonce': frontendajax.nonce, // Utilisation du nonce ajouté dans le PHP
+      'categories_photos': categoriesPhotos,
+      'formats': formats,
+      'tri': tri,
+      'page': page
+    };
 
     // Modification du bouton pour indiquer un état de chargement
     $('#load-more').text("Chargement...").prop("disabled", true);
 
-    // Requête AJAX pour filtrer les photos
+    // Envoi de la requête
     $.ajax({
-      url: 'http://localhost/mota/'
       type: 'POST',
-      data: {
-      action: 'filter_photos',
-      category: category,
-      format: format,
-      tri: tri
-      },
-      success: function (response) {
-
-        // Remplacement du contenu actuel de la galerie par le nouveau contenu filtré
-        $('.gallery').html(response);
-
-        // Vérifie si la réponse n'est pas vide
-        // Si c'est le cas, on réactive le bouton "Charger plus"
-        // Sinon, on indique qu'aucune photo n'a été trouvée
-        if (response.trim() !== "") {
-          $('#load-more').text("Charger plus").prop("disabled", false);
-        } else {
-          $('#load-more').text("Aucune photo trouvée").prop("disabled", true);
-        }
-      }
-    });
-  });
-
-  // Gestionnaire d'événement pour le bouton "Charger plus"
-  $('#load-more').click(function () {
-    const category = $('#filter-category').val();
-    const format = $('#filter-format').val();
-    const tri = $('#filter-tri').val();
-
-    // Indication d'un état de chargement pour le bouton
-    $('#load-more').text("Chargement...").prop("disabled", true);
-
-    // Incrémentation de la pagination pour charger les éléments suivants
-    page++;
-
-    // Requête AJAX pour charger plus de photos
-    $.ajax({
       url: frontendajax.ajaxurl,
-      type: 'POST',
-      data: {
-        action: 'filter_photos',
-        category: category,
-        format: format,
-        sort: sort,
-        page: page
-      },
-      success: function (response) {
-
-        // Si la réponse contient des photos, elles sont ajoutées à la galerie
-        if (response.trim() !== "" && !response.includes("Aucune photo trouvée")) {
-          $('.gallery').append(response);
-          $('#load-more').text("Charger plus").prop("disabled", false);
+      data: data,
+      success: function(response) {
+        // Mise à jour de la galerie avec les nouvelles photos
+        if(page === 1) {
+          $('.gallery').html(response); // Si c'est la première page, remplace le contenu
         } else {
-          // Sinon, on indique qu'il n'y a pas d'autres photos à charger
-          $('#load-more').text("Aucune autre photo").prop("disabled", true);
+          $('.gallery').append(response); // Sinon, ajoute au contenu existant
         }
+        // Modification du bouton après le chargement des données
+        $('#load-more').text("Charger plus").prop("disabled", false);
+      },
+      error: function(errorThrown) {
+        console.log(errorThrown);
+        // Afficher un message d'erreur ou une action de repli
+        $('#load-more').text("Erreur").prop("disabled", false);
       }
     });
-  });
+  }
+
 });
