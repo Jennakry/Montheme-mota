@@ -8,6 +8,7 @@ jQuery(document).ready(function ($) {
   $(document).on('click', '.gallery-fullscreen', function (e) {
     // Empêche le comportement par défaut de l'événement
     e.preventDefault();
+    console.log('Clicked on .gallery-fullscreen');
 
     // Trouve l'élément parent le plus proche avec la classe 'gallery-item' et le stocke
     currentImage = $(this).closest('.photo1');

@@ -57,12 +57,12 @@ function filter_photos()
     $args = array(
         'post_type' => 'photos',
         'paged' => $page,
-        'posts_per_page' => 10, // Vous pouvez ajuster cela si nécessaire
-        'order' => 'DESC', // Ou 'ASC'
-        // Ajoutez ici d'autres arguments selon vos besoins
+        'posts_per_page' => 10,
+        'order' => 'DESC',
+
     );
 
-    // Ajoutez les termes de la taxonomie 'categories-photos' si nécessaire
+    //CATEGORIE
     if (!empty($category) && $category != 'default-category') {
         $args['tax_query'][] = array(
             'taxonomy' => 'categories-photos',
@@ -71,12 +71,21 @@ function filter_photos()
         );
     }
 
-    // Ajoutez les termes de la taxonomie 'formats' si nécessaire
+    //FORMATS
     if (!empty($format) && $format != 'default-format') {
         $args['tax_query'][] = array(
             'taxonomy' => 'formats',
             'field' => 'slug',
             'terms' => $format,
+        );
+    }
+
+    // DATE
+    if (!empty($format) && $tri != 'default-tri') {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'date',
+            'field' => 'slug',
+            'terms' => $tri,
         );
     }
 
@@ -86,8 +95,7 @@ function filter_photos()
     if ($query->have_posts()) {
         while ($query->have_posts()) {
             $query->the_post();
-            // Ici, vous incluriez le code pour afficher chaque photo
-            // Par exemple, inclure un template part ou utiliser directement HTML
+
             get_template_part('template-parts/photo-block', 'photo');
         }
     } else {

@@ -132,6 +132,12 @@ footer {
     transition: all .3s ease-in-out;
   }
   /* Création du bouton pour fermer */
+  .btn-modal.close {
+    z-index:2000;
+    top: 1em;
+    right: 1em;
+  }
+
 #modal__burger:hover .line:nth-child(2),
 .btn-modal.close .line:nth-child(2) {
     opacity: 0;
@@ -145,15 +151,18 @@ footer {
     transform: rotate(-45deg) translate3d(8px, -6px, 0);
   }
   .modal__content {
-    position: absolute;
-    right: 0;
-    opacity: 0;
-    top: 70px;
+    position: fixed;
+    left: 0;
+    top:117px;
+    opacity: 1;
     width: 100vw;
-    height: 0;
+    height: 100vh;
     background: #E00000; 
-    visibility: hidden;
-    transition: all .3s ease-in-out;
+    visibility: visible;
+    transition: visibility 0s, opacity 0.3s linear;
+    transform: translateX(-100%);
+    z-index:1000;
+    overflow-y: auto;
 }
 
 #modal__content .menu-header-menu-container {
@@ -186,10 +195,11 @@ footer {
 }
 
 .animate-modal {
+    visibility: visible;
     opacity: 1;
-    /* width: 100vw; */
-    height: auto;  
-    animation: move-down 2s 300ms both;
+    transition: transform 0.3s, ease-in-out, visibility 0s, opacity 0.3s linear;
+    transform: translateX(0);
+    
 }
 
 /* Pour faire apparaitre la moadle en descendant et avec agmentatation de l'opacité */
@@ -214,43 +224,39 @@ footer {
     justify-content: center;
     border-top: 1px solid black;
     padding-top:10px;
-    height: 40px;
     width: 1440px;
+    height: 80px;
 }
 
 /*------------------------------------------------------- MODALE CONTACT----------------------------------------------------------------------*/
 
 /* The Modal (background) */
 
+
 .modal {
-    display: none;
-    /* Caché par défaut */
+    display: none; /* Caché par défaut */
     position: fixed;
     z-index: 1;
     padding-top: 100px;
-    /* l'endroit de la modale */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
-    /* Black w/ opacity */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);/* Black w/ opacity */
 }
 
-/*Modal Content */
-.modal-content {display:flex;
-    justify-content: center;
-    width: 597px;
-    /* Full width */
-    height: 769px;
+/*Le contenu de la Modale */
+.modal-content {
+    position:relative;
+    width: 80%;
     background-color: #fefefe;
-    margin: auto;   
+    margin: auto;  
+    padding:20px;  
     z-index: 100;
-    border: 5px solid #000000;
+    border: 5px solid black;
+    max-width: 600px;
 }
 
 .close:hover,
@@ -260,14 +266,30 @@ footer {
     cursor: pointer;
 }
 
-.wpcf7-form-control .wpcf7-email .wpcf7-validates-as-required .wpcf7-text .wpcf7-validates-as-email {
-    border-radius: 5px;
+.wpcf7-form-control {
+    border-radius: 8px;
+    color:#B8BBC2;
 }
 .wpcf7-submit .has-spinner {
     width:260px;
     height:50px;
 }
+label {
+    font-size: 12px;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+}
 
+.titre-contact {
+    background-image: url(./assets/images/Contact-header.png) ;
+    background-repeat:repeat ;
+    width: 100%;
+    height:49px;
+    overflow:hidden;
+    margin-bottom: 10px;
+
+}
 
 /*------------------------------------------------------- SINGLE-PHOTOS ----------------------------------------------------------------------*/
 .photo_detail {
@@ -377,6 +399,24 @@ footer {
     border-bottom: 1px solid #000;
    
 }
+
+ .photo_choix {
+    display:flex;
+    gap:20px;
+}
+
+.photo_avant img, .photo_apres img{
+    display: flex;
+    padding: 10px;
+    
+}
+.gallery-related{
+    display:flex;
+    gap:20px;
+    justify-content:center;
+    margin-top: 40px;
+}
+
 /* BOUTON PAGE SINGLE-PHOTO*/
 
 button {
@@ -387,26 +427,36 @@ button {
 
 .btn  {
     background-color: #D8D8D8;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 .btn a {font-size: 12px;}
 
-.load-more{display: block;
+.btn a:hover{
+    background: #000;
+    color:white;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+#load-more{display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 40px;
     margin-bottom: 40px;
     cursor: pointer;
-    border: none;
-    padding: 10px;
-    width: 272px;
-    height: 50px;
+    font-weight:400px;
+
  }
- #load-more:disabled {
+ /* #load-more:disabled {
     background-color: #d3d3d3;
     cursor: not-allowed;
-  }
+  } */
   
- 
+  #load-more:hover {
+    background: black;
+    color:white;
+    font-weight:700px!important;
+
+  }
 
 /*------------------------------------------------------- BLOCK-SINGLE (section 3)----------------------------------------------------------------------*/
 .photo_aleatoire {
@@ -575,6 +625,7 @@ font-weight: 700;
 /*****************************FILTRE et tri (filtre.php)************************/
 .filters {
     display: flex;
+    flex-wrap:nowrap;
     margin-bottom: 39px;
 
   }
@@ -614,9 +665,16 @@ font-weight: 700;
     
   }
   
+  .filters-container {
+    display:flex;
+    justify-content: center;
+  }
 
+  
 
 /************************HERO BANNER (banner.php)*****************************************************/
+
+
 
 .hero-content-banner {
     width: 1440px;
@@ -750,7 +808,6 @@ font-weight: 700;
         height: 495px;
     }
     .filters{
-        width: 100%;
         padding: 0 20px;
     }        
 
@@ -774,10 +831,7 @@ font-weight: 700;
         left: 35%;
     }
 
-    .contain-photos .photo1 {
-        width: 365px;
-        height: 300px;
-    }    
+    
 
 }
 
@@ -795,10 +849,7 @@ font-weight: 700;
     .container-header img {
         width: 138px;
         }
-        .contain-photos .photo1 {
-            width: 365px;
-            height: 300px;
-        }    
+      
     
         #menu-menu-header {
             opacity: 0;
@@ -810,10 +861,19 @@ font-weight: 700;
             height: 0;
         }
         .gallery {
-            flex-direction : column;
-            gap: 211px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 0 15px;
+            gap:15px;
+    
         }
     
+        .gallery .photo1 { /* Assurez-vous que cette classe correspond à celle que vous utilisez pour les éléments individuels de la galerie */
+            width: calc(100% - 30px); /* Pour que chaque élément prenne toute la largeur et s'affiche sur sa propre ligne */
+            margin: 10px auto;
+            box-sizing: border-box; /* Si les éléments individuels de la galerie ont leur propre flex context */
+        }
         #modal__content .menu-menu-header1 {
             opacity: 1;
             height: auto;
@@ -832,7 +892,7 @@ font-weight: 700;
     
         #nav .menu-menu-header1,
         #nav #modal__burger {
-            margin-right: 0;
+            margin-right: 45px;
         }
     
     .hero-content-banner {   
@@ -882,11 +942,45 @@ font-weight: 700;
     }
 
     
+/*FILTRE*/
+.filters {
+    align-items: center;
+    margin-bottom: 20px;
 
-    .filters .filter-format{
-        width: 190px;
+}
+    
+.filters .filter{
+    width: 100%;
+    margin-left:0;
+    margin-bottom: 10px;
+}
 
-    }        
+.filters .filter-category
+.filters .filter-format,
+.filters .filter-tri{
+    width: calc(100% - 36px);
+    margin: 0 auto;
+}
+.filters .filter:nth-child(3) {
+    margin-left: 20px      
+
+}
+
+#menu-menu-footer {
+  flex-direction: column;
+  gap:20px;
+  justify-content: flex-start;
+  align-items: center;
+  width: auto;
+  padding-top: 5px;
+  height:auto;
+  margin-bottom: 20px;
+}
+
+.menu-item {
+    width: 100%;
+    text-align:center;
+}
 
 }
 

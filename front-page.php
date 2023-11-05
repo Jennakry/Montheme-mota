@@ -11,7 +11,7 @@
 
 
         <div id="primary" class="content-area">
-            <section class="contain-photos gallery">
+            <section class="contain-photos">
                 <?php
                 // 1. On définit le tableau d'argument pour définir ce que l'on souhaite récupérer -->
                 $args = array(

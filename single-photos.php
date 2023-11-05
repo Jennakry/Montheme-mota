@@ -43,26 +43,27 @@ get_header();
                         </div>
                     </div>
 
+
                     <div class="post-image container--image brightness">
                         <?php if (has_post_thumbnail()) : ?>
+                            <figure class="photo1 brightness">
+                                <?php the_post_thumbnail(); ?>
+                                <div>
 
-                            <img src="<?php the_post_thumbnail_url(array(500, 500)); ?>" alt="<?php the_title_attribute(); ?>" class="post-thumbnail">
-
-
+                                    <a href="#" class="openLightbox" aria-label="Afficher en plein écran" data-src="<?php the_post_thumbnail_url(); ?>" data-reference="<?php the_field('reference'); ?>">
+                                        <!-- Icône plein écran ou texte ici -->
+                                    </a>
+                                </div>
+                            </figure>
                         <?php endif; ?>
                     </div>
 
             </article>
-
     </div>
 
     <div class="photo__contact">
-
         <p>Cette photo vous intéresse-t-elle?</p>
-
-
         <button class="btn" type="button"><a href="#" id="contact_btn" class="contact">Contact</a></button>
-
 
         <!-- On vérifie si le résultat de la requête contient des articles -->
 
@@ -102,20 +103,56 @@ get_header();
             </div>
         </div>
     </div>
-    <div class="section3">
+    </div>
+</section>
+
+<!-- AFFICHAGE DE DEUX PHOTOS DE LA MEME CATEGORIES -->
+<section class="photo_detail">
+    <div class="affichage2photos">
         <h3>VOUS AIMEREZ AUSSI</h3>
+        <?php
+        // Récupérez les catégories de la photo courante
+        $categories = get_the_terms(get_the_ID(), 'categories-photos');
+        if ($categories && !is_wp_error($categories)) {
+            // Prenez juste le premier terme
+            $category = array_shift($categories);
+            $args = array(
+                'post_type' => 'photos',
+                'posts_per_page' => 2,
+                'post__not_in' => array(get_the_ID()), // Exclure la photo actuelle
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'categories-photos',
+                        'field'    => 'term_id',
+                        'terms'    => $category->term_id,
+                    ),
+                ),
+            );
 
-        <?php include_once "Block-single.php"; ?>
+            $related_photos = new WP_Query($args);
 
-        <div class="btn-all-photos">
-            <button class="btn" id="all-photos" type="button">
-                <a href="http://localhost/mota/" aria-label="Page d'accueil de Nathalie Mota">Toutes les photos</a>
-            </button>
-        </div>
-
+            if ($related_photos->have_posts()) {
+                echo '<div class="gallery-related">';
+                while ($related_photos->have_posts()) : $related_photos->the_post();
+                    get_template_part('template-parts/photo-block'); // Assurez-vous que ce fichier existe et est correctement formaté
+                endwhile;
+                echo '</div>';
+                wp_reset_postdata();
+            }
+        }
+        ?>
     </div>
 
+
+    <div class="btn-all-photos">
+        <button class="btn" id="all-photos" type="button">
+            <a href="http://localhost/mota/" aria-label="Page d'accueil de Nathalie Mota">Toutes les photos</a>
+        </button>
+    </div>
 </section>
+
+<?php get_footer(); ?>
+
 
 </main>
 
