@@ -50,7 +50,7 @@ get_header();
                                 <?php the_post_thumbnail(); ?>
                                 <div>
 
-                                    <a href="#" class="openLightbox" aria-label="Afficher en plein écran" data-src="<?php the_post_thumbnail_url(); ?>" data-reference="<?php the_field('reference'); ?>">
+                                    <a href="#" class="openLightbox gallery-fullscreen" aria-label="Afficher en plein écran" data-src="<?php the_post_thumbnail_url(); ?>" data-reference="<?php the_field('reference'); ?>">
                                         <!-- Icône plein écran ou texte ici -->
                                     </a>
                                 </div>
@@ -145,7 +145,7 @@ get_header();
 
 
     <div class="btn-all-photos">
-        <button class="btn" id="all-photos" type="button">
+        <button id="all-photos" type="button">
             <a href="http://localhost/mota/" aria-label="Page d'accueil de Nathalie Mota">Toutes les photos</a>
         </button>
     </div>

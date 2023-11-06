@@ -100,7 +100,7 @@ footer {
     margin-right: 40px;    
 }
 
-/*HEADER MOBILE */
+/**************************************MENU HAMBURGER MOBILE *********************************************************************/
 
 
 .btn-modal {
@@ -253,11 +253,34 @@ footer {
     width: 80%;
     background-color: #fefefe;
     margin: auto;  
-    padding:20px;  
-    z-index: 100;
+    padding:15px 0;  
     border: 5px solid black;
     max-width: 600px;
 }
+
+.popup-informations {    
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding: 5px 0 70px;
+    max-width: 265px;
+    margin: auto;
+}
+
+
+
+.wpcf7-form p input {
+    height: 40px;
+    padding: 10px;
+}
+
+
+.wpcf7-form p .wpcf7-submit {     
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    font-weight: 400;
+}
+
 
 .close:hover,
 .close:focus {
@@ -268,7 +291,7 @@ footer {
 
 .wpcf7-form-control {
     border-radius: 8px;
-    color:#B8BBC2;
+    color:black;
 }
 .wpcf7-submit .has-spinner {
     width:260px;
@@ -709,6 +732,11 @@ font-weight: 700;
 
 
 
+
+
+
+
+
 .lightbox {
 
     display: none;
@@ -736,7 +764,7 @@ font-weight: 700;
   .lightbox-close {
     background: url("./assets/images/close-lightbox.png") center center / 100% 100%;
     z-index: 1;
-    top: 100px;
+    top: 125px;
     right: 100px;
     width: 30px;
     height: 30px;
@@ -981,8 +1009,37 @@ font-weight: 700;
     width: 100%;
     text-align:center;
 }
+.post-description{
+    width:100%;
+}
+.post-description h2 {
+    font-size:46px;
+}
+
+.post-content {
+    flex-direction:column-reverse;
+    justify-content:center;
+}
+
+.photo_choix{
+    visibility:hidden;
+}
+.photo__contact {
+    flex-direction: column;
+}
+
+.gallery-related {
+
+    flex-direction:column;
+}
+
+#all-photos{
+    visibility: hidden;
+}
 
 }
+
+
 
 /*  **********************************  */
 /*    Media query : max-width: 580px    */
