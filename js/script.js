@@ -1,18 +1,13 @@
-jQuery(document).ready(function($) {
-
 //MODALE//
-
-// Get the modal
+jQuery(document).ready(function($) {
+// Il récupère la Modale 
 var modal = document.getElementById('myModal');
 
 // On click sur le lien personalisé "Contact"
 var btn = document.getElementById("menu-item-47");
-
+// Récupère tous les éléments avec la classe 'btn'
 const btn2= document.querySelectorAll('.btn');
-
-// Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close");
-
 // Quand on click, on ouvre la modal
 btn.addEventListener('click' , function() {
     modal.style.display = "block";
@@ -22,6 +17,8 @@ btn2.forEach(function(button){
     modal.style.display = "block";
   })
 })
+ // Ajoute un écouteur d'événement de clic sur la fenêtre. 
+ //Si l'utilisateur clique en dehors de la modale, la modale se ferme.
 window.addEventListener('click', function(event){
   if (event.target === modal) {
     modal.style.display = 'none';

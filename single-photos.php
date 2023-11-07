@@ -6,66 +6,61 @@ get_header();
 ?>
 
 <section class="photo_detail">
-    <div class="content">
-        <main class="site-main">
-            <article class="container__photo" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                <!-- On récupèrer le ID et la classe de l'artcle -->
+    <!-------------------------------- Section 1 ----------------------------------------->
+    <div class="post-content">
+        <!-------------------------------- Colonne gauche/Description ----------------------------------------->
+        <div class="post-description">
 
-                <div class="post-content">
-                    <div class="post-description">
+            <h2 class="title">
+                <?php the_title(); ?>
+            </h2>
 
-                        <h2 class="title">
-                            <?php the_title(); ?>
-                        </h2>
+            <div class="description">
+                <p>
+                    REFERENCE: <?php echo get_post_meta(get_the_ID(), 'reference', true); ?>
+                    <!-- ACF  -->
+                </p>
+                <p>
 
-                        <div class="description">
-                            <p class="ref">
-                                REFERENCE: <?php echo get_post_meta(get_the_ID(), 'reference', true); ?>
-                                <!-- ACF  -->
-                            </p>
-                            <p>
+                    CATEGORIE: <?php echo the_terms(get_the_ID(), 'categories-photos', false); ?>
+                    <!-- CPT UI -->
+                </p>
+                <p>
+                    TYPE: <?php echo get_post_meta(get_the_ID(), 'type', true); ?>
+                </p>
+                <p>
 
-                                CATEGORIE: <?php echo the_terms(get_the_ID(), 'categories-photos', false); ?>
-                                <!-- CPT UI -->
-                            </p>
-                            <p>
-                                TYPE: <?php echo get_post_meta(get_the_ID(), 'type', true); ?>
-                            </p>
-                            <p>
+                    FORMAT: <?php echo the_terms(get_the_ID(), 'formats', false); ?>
+                </p>
 
-                                FORMAT: <?php echo the_terms(get_the_ID(), 'formats', false); ?>
-                            </p>
+                <p>
 
-                            <p>
+                    ANNEE: <?php echo get_the_date(); ?>
+                </p>
+            </div>
+        </div>
 
-                                ANNEE: <?php echo get_the_date(); ?>
-                            </p>
-                        </div>
+        <!-------------------------------- Colonne droite/Photos ----------------------------------------->
+        <div class="post-image brightness">
+            <?php if (has_post_thumbnail()) : ?>
+                <figure class="photo1 brightness">
+                    <?php the_post_thumbnail(); ?>
+                    <div>
+
+                        <a href="#" class="openLightbox gallery-fullscreen" aria-label="Afficher en plein écran" data-src="<?php the_post_thumbnail_url(); ?>" data-reference="<?php the_field('reference'); ?>">
+                            <!-- Icône plein écran ou texte ici -->
+                        </a>
                     </div>
-
-
-                    <div class="post-image container--image brightness">
-                        <?php if (has_post_thumbnail()) : ?>
-                            <figure class="photo1 brightness">
-                                <?php the_post_thumbnail(); ?>
-                                <div>
-
-                                    <a href="#" class="openLightbox gallery-fullscreen" aria-label="Afficher en plein écran" data-src="<?php the_post_thumbnail_url(); ?>" data-reference="<?php the_field('reference'); ?>">
-                                        <!-- Icône plein écran ou texte ici -->
-                                    </a>
-                                </div>
-                            </figure>
-                        <?php endif; ?>
-                    </div>
-
-            </article>
+                </figure>
+            <?php endif; ?>
+        </div>
     </div>
-
+    <!-------------------- SECTION DU MILIEU ------------------->
     <div class="photo__contact">
         <p>Cette photo vous intéresse-t-elle?</p>
         <button class="btn" type="button"><a href="#" id="contact_btn" class="contact">Contact</a></button>
 
-        <!-- On vérifie si le résultat de la requête contient des articles -->
+        <!-------------------- PHOTOS APPARENTES ------------------->
 
         <div class="photo_choix">
             <div class="photo_avant">
@@ -103,7 +98,7 @@ get_header();
             </div>
         </div>
     </div>
-    </div>
+
 </section>
 
 <!-- AFFICHAGE DE DEUX PHOTOS DE LA MEME CATEGORIES -->
@@ -134,7 +129,7 @@ get_header();
             if ($related_photos->have_posts()) {
                 echo '<div class="gallery-related">';
                 while ($related_photos->have_posts()) : $related_photos->the_post();
-                    get_template_part('template-parts/photo-block'); // Assurez-vous que ce fichier existe et est correctement formaté
+                    get_template_part('template-parts/photo-block');
                 endwhile;
                 echo '</div>';
                 wp_reset_postdata();
@@ -152,12 +147,6 @@ get_header();
 </section>
 
 <?php get_footer(); ?>
-
-
-</main>
-
-
-
 
 </div>
 <?php get_footer(); ?>

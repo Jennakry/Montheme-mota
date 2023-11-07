@@ -218,7 +218,13 @@ footer {
 
 /*---------------------------------------------------- FOOTER ------------------------------------------------------------------------*/
 
+
 #menu-menu-footer {
+
+    display:flex;
+    gap:140px;
+}
+.footer {
     display:flex;
     gap: 74px;
     justify-content: center;
@@ -228,6 +234,17 @@ footer {
     height: 80px;
 }
 
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer .widget {
+    flex: 1; 
+    padding: 0 40px;
+}
 /*------------------------------------------------------- MODALE CONTACT----------------------------------------------------------------------*/
 
 /* The Modal (background) */
@@ -322,15 +339,37 @@ label {
     padding: 30px 20px 0;
     font-family: 'Space Mono', monospace;
 }
+
+.post-content {
+    display:flex;
+    flex-direction: row;
+}
+   
 .post-description {
     justify-content: flex-end;
     border-bottom: 1px solid #000;
 }
 
+.title {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 66px;
+    line-height: 58px;
+    width: 80%;
+    padding: 40px 0;
+
+}
 .post-description,
 .post-image {
     max-height: 890px;
     width: 50%; 
+}
+
+.description {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .post-image {position: relative;
@@ -343,58 +382,6 @@ label {
     margin-left: 10px;
 }
 
-
-.post-description h2 {
-    font-style: italic;
-    font-weight: 400;
-    font-size: 66px;
-    line-height: 58px;
-    width: 80%;
-    padding: 40px 0;
-
-}
-
-.description {
-    padding-bottom: 30px;
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 2px;
-}
-
-
-.container__photo {display: flex;
-    flex-direction: column;
-    text-transform: uppercase;
-
-}
-
-.post-content {
-    display:flex;
-    flex-direction: row;
-}
-   
-
-.post-image img {
-    width:100%;
-
-}
-
-.brightness img {
-    transition: all 0.5s ease-in-out;
-}
-
-.post-description .brightness::before {
-    content: "";
-    position: absolute;
-    background-color: #000000;
-    width: 100%;
-    opacity: 0;  
-    transition: all 0.5s ease-in-out;
-}
-
-.brightness:hover::before {
-    opacity: 0.5;
-}
 .openLightbox {
     position:absolute;
     cursor: pointer;
@@ -469,11 +456,7 @@ button {
     font-weight:400px;
 
  }
- /* #load-more:disabled {
-    background-color: #d3d3d3;
-    cursor: not-allowed;
-  } */
-  
+ 
   #load-more:hover {
     background: black;
     color:white;
@@ -481,7 +464,7 @@ button {
 
   }
 
-/*------------------------------------------------------- BLOCK-SINGLE (section 3)----------------------------------------------------------------------*/
+/*------------------------------------------------------- BLOCK PHOTOS APPARENTES----------------------------------------------------------------------*/
 .photo_aleatoire {
     display: flex;
     justify-content: center;
