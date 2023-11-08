@@ -31,7 +31,6 @@ function montheme_mota_widgets_init()
 add_action('widgets_init', 'montheme_mota_widgets_init');
 
 
-
 // Déclare les scripts JavaScript
 function theme_enqueue_scripts()
 {
@@ -57,9 +56,6 @@ add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 // Traitement des requêtes Ajax pour les filtres
 function filter_photos()
 {
-
-    $page = $_POST['page'];
-    error_log('Current page: ' . $page);
     // Vérifiez le nonce pour la sécurité
     if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'filter_photos_nonce')) {
         wp_die('La sécurité de la requête n\'a pas pu être vérifiée.');
@@ -75,12 +71,14 @@ function filter_photos()
     $args = array(
         'post_type' => 'photos',
         'paged' => $page,
-        'posts_per_page' => 10,
-        'order' => 'DESC',
-
+        'posts_per_page' => 10, // Vous pouvez ajuster cela si nécessaire
+        'order' => 'DESC', // Ou 'ASC'
+        // Ajoutez ici d'autres arguments selon vos besoins
     );
 
-    //CATEGORIE
+
+
+    // Ajoutez les termes de la taxonomie 'categories-photos' si nécessaire
     if (!empty($category) && $category != 'default-category') {
         $args['tax_query'][] = array(
             'taxonomy' => 'categories-photos',
@@ -89,7 +87,7 @@ function filter_photos()
         );
     }
 
-    //FORMATS
+    // Ajoutez les termes de la taxonomie 'formats' si nécessaire
     if (!empty($format) && $format != 'default-format') {
         $args['tax_query'][] = array(
             'taxonomy' => 'formats',
@@ -98,12 +96,12 @@ function filter_photos()
         );
     }
 
-    // DATE
-    if (!empty($format) && $tri != 'default-tri') {
-        $args['tax_query'][] = array(
-            'taxonomy' => 'date',
-            'field' => 'slug',
-            'terms' => $tri,
+    // Ajouter la logique de tri par date si nécessaire
+    if (!empty($tri) && in_array($tri, array('2019', '2020', '2021', '2022'))) {
+        $args['date_query'] = array(
+            array(
+                'year'  => $tri,
+            ),
         );
     }
 
@@ -114,7 +112,7 @@ function filter_photos()
         while ($query->have_posts()) {
             $query->the_post();
 
-            get_template_part('template-parts/photo-block', 'photo');
+            get_template_part('template-parts/photo-block');
         }
     } else {
         echo 'Aucune photo trouvée.';

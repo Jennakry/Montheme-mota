@@ -1,20 +1,23 @@
 <footer class="footer">
 
-    <?php
-    wp_nav_menu([
-        'theme_location' => 'footer',
-        'container' => 'false', //On retire le conteneur généré par WP
+    <?php get_template_part('template-parts/contact'); ?>
+    <?php get_template_part('template-parts/lightbox'); ?>
 
-    ]);
-    ?>
-    <aside id="widget-area">
-        <?php dynamic_sidebar('footer-widget'); ?>
-    </aside>
-</footer>
+    <nav class="footer-nav">
+        <?php wp_footer(); ?>
 
-<?php get_template_part('template-parts/contact'); ?>
-<?php get_template_part('template-parts/lightbox'); ?>
+        <?php
+        wp_nav_menu([
+            'theme_location' => 'footer',
+            'container' => 'false', //On retire le conteneur généré par WP
 
-</body>
+        ]);
+        ?>
+        <aside id="widget-area">
+            <?php dynamic_sidebar('footer-widget'); ?>
+        </aside>
+    </nav>
 
-</html>
+    </body>
+
+    </html>
