@@ -10,6 +10,8 @@ jQuery(document).ready(function ($) {
     e.preventDefault();
     console.log('Clicked on .gallery-fullscreen');
 
+    var page = this.getAttribute('data-page');
+
     // Trouve l'élément parent le plus proche avec la classe 'gallery-item' et le stocke
     currentImage = $(this).closest('.photo1');
 
@@ -24,7 +26,22 @@ jQuery(document).ready(function ($) {
     $('.lightbox .lightbox-title').text(imgTitle); // Affiche le titre
     $('.lightbox .lightbox-reference').text(imgReference);
     $('.lightbox .lightbox-category').text(imgCategory);
+    //Si page est différent de 'accueil'
+if (page != "accueil"){
+  $('.lightbox .lightbox-title').css("display", 'none'); // Affiche le titre
+  $('.lightbox .lightbox-reference').css("display", 'none');
+  $('.lightbox .lightbox-category').css("display", 'none');
+  $('.lightbox .lightbox-next').css("display", 'none');
+  $('.lightbox .lightbox-prev').css("display", 'none');
+}
+else {
+  $('.lightbox .lightbox-title').css("display", 'block'); // Affiche le titre
+  $('.lightbox .lightbox-reference').css("display", 'block');
+  $('.lightbox .lightbox-category').css("display", 'block');
+  $('.lightbox .lightbox-next').css("display", 'block');
+  $('.lightbox .lightbox-prev').css("display", 'block');
 
+}
     // Ajout de classes pour afficher la lightbox et empêcher le défilement du corps
     $('body').addClass('no-scroll');
     $('.lightbox').addClass('lightbox-visible');

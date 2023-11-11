@@ -41,20 +41,23 @@ get_header();
         </div>
 
         <!-------------------------------- Colonne droite/Photos ----------------------------------------->
-        <div class="post-image brightness">
+    
+        <div class="post-image ">
             <?php if (has_post_thumbnail()) : ?>
                 <figure class="photo1 brightness">
                     <?php the_post_thumbnail(); ?>
                     <div>
-
-                        <a href="#" class="openLightbox gallery-fullscreen" aria-label="Afficher en plein écran" data-src="<?php the_post_thumbnail_url(); ?>" data-reference="<?php the_field('reference'); ?>">
-                            <!-- Icône plein écran ou texte ici -->
+                        <a href="#" class="openLightbox gallery-fullscreen" 
+                        aria-label="Afficher en plein écran" 
+                        data-src="<?php the_post_thumbnail_url(); ?>" 
+                        data-reference="<?php the_field('reference'); ?>">
                         </a>
                     </div>
                 </figure>
             <?php endif; ?>
         </div>
     </div>
+
     <!-------------------- SECTION DU MILIEU ------------------->
     <div class="photo__contact">
         <p>Cette photo vous intéresse-t-elle?</p>

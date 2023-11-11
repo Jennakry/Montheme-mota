@@ -96,6 +96,15 @@ function filter_photos()
         );
     }
 
+    if (!empty($date) && $format != 'default-format') {
+        $args['tax_query'][] = array(
+            'taxonomy' => 'date',
+            'field' => 'slug',
+            'terms' => $date,
+        );
+    }
+
+
     // Ajouter la logique de tri par date si nécessaire
     if (!empty($tri) && in_array($tri, array('2019', '2020', '2021', '2022'))) {
         $args['date_query'] = array(

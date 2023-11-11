@@ -8,3 +8,4 @@
         <span class="lightbox-category">Catégorie</span>
     </div>
 </div>
+
